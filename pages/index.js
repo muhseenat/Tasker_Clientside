@@ -1,8 +1,10 @@
-
-
+import Nav from "../components/Navbar"
 const index = () => {
   return (
-    <div>HomePage</div>
+    <div>
+
+      <Nav/>
+    </div>
   )
 }
 
