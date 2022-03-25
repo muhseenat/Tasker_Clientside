@@ -1,22 +1,42 @@
 import {useState } from 'react';
+import {useRouter} from 'next/router';
+import Link from 'next/link'
 import  loginStyles from '../styles/Login.module.css';
 import Input from '../components/AuthInput';
-
+import axios from '../axios'
 const signup= () => {
 
     const [forminput,setFormInput] = useState({});
+	const router=useRouter();
      const setInput=(e)=>{
          const key= e.target.name;
          const value=e.target.value;
          setFormInput({...forminput,[key]:value})
 
      }
+	 const handleSignup= async(e)=>{
+		 e.preventDefault()
+		 console.log('working.....');
+		 try {
+			 const res=await axios.post('/signup',forminput)
+			 if(res){
+				 router.push({
+					 pathname:'/',
+					 query:{returnUrl:router.asPath}
+				 })
+			 }
+		 } catch (error) {
+			 console.log(error);
+		 }
+	 }
+	
+	 
   return (
     <div>
      <h3 className={loginStyles.heading}>Signup Form </h3>
 <div className={loginStyles.app}>
 		<div className={loginStyles.bg}></div>
-		<form className={loginStyles.loginform}>
+		<form className={loginStyles.loginform} onSubmit={handleSignup}>
 			<header className={loginStyles.header}>
 				<img className={loginStyles.image} src="https://jqlacorte.com/wp-content/uploads/2015/09/jql-job-seekers.png?format=auto&height=80&version=1592223909&width=80"/>
 			
@@ -32,12 +52,13 @@ const signup= () => {
 
 			</div>
 
-		</form>
 
-		<footer className={loginStyles.footer}>
-			<button className={loginStyles.button}>Signup</button>
-			<p className={loginStyles.para}> Already have an account? <a className={loginStyles.a} href="#">Login</a></p>
-		</footer>
+	
+			<button className={loginStyles.button} type="submit">Signup</button>
+			<p className={loginStyles.para}> Already have an account?
+            <Link href="/login"><a className={loginStyles.a} >Login</a></Link></p>
+	
+		</form>
 
 
 	</div>
