@@ -2,13 +2,15 @@ import {useState } from 'react';
 import  loginStyles from '../styles/Login.module.css';
 import Input from '../components/AuthInput';
 
-const login = () => {
-   const user= false;
+const signup= () => {
+
+	const user=false;
     const [forminput,setFormInput] = useState({});
      const setInput=(e)=>{
          const key= e.target.name;
          const value=e.target.value;
          setFormInput({...forminput,[key]:value})
+
      }
   return (
     <div>
@@ -23,17 +25,20 @@ const login = () => {
 			</header>
 
 			<div className={loginStyles.inputs}>
-               <Input className={loginStyles.input}  type={"email"} placeholder={"Email"} name={"email"} setInput={setInput}/>
-               <Input className={loginStyles.input}  type={"password"} placeholder={"Password"} name={"password"} setInput={setInput}/>
-        
+               <Input className={loginStyles.input}type={"text"} placeholder={"Username"} name={"name"} setInput={setInput}/>
+<Input className={loginStyles.input} type={"email"} placeholder={"Email"} name={"email"} setInput={setInput}/>
+<Input className={loginStyles.input} type={"tel"} placeholder={"Phone number"} name={"phone"} setInput={setInput}/>
+<Input className={loginStyles.input} type={"password"} placeholder={"Password"} name={"password"} setInput={setInput}/>
+<Input className={loginStyles.input} type={"password"} placeholder={"Confirm Password"} name={"cpassword"} setInput={setInput}/>
+
 
 			</div>
 
 		</form>
 
 		<footer className={loginStyles.footer}>
-			<button className={loginStyles.button}>Login</button>
-			<p className={loginStyles.para}> Don't have an account? <a className={loginStyles.a} href="#">Sign Up</a></p>
+			<button className={loginStyles.button}>Signup</button>
+			<p className={loginStyles.para}> Already have an account? <a className={loginStyles.a} href="#">Login</a></p>
 		</footer>
 
 
@@ -45,4 +50,4 @@ const login = () => {
   )
 }
 
-export default login
+export default signup
