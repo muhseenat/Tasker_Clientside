@@ -3,7 +3,6 @@ import  loginStyles from '../styles/Login.module.css';
 import Input from '../components/AuthInput';
 
 const login = () => {
-   const user= false;
     const [forminput,setFormInput] = useState({});
      const setInput=(e)=>{
          const key= e.target.name;
@@ -12,6 +11,7 @@ const login = () => {
      }
   return (
     <div>
+<h3 className={loginStyles.heading}>Login </h3>
 
 <div className={loginStyles.app}>
 

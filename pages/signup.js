@@ -4,7 +4,6 @@ import Input from '../components/AuthInput';
 
 const signup= () => {
 
-	const user=false;
     const [forminput,setFormInput] = useState({});
      const setInput=(e)=>{
          const key= e.target.name;
@@ -14,15 +13,14 @@ const signup= () => {
      }
   return (
     <div>
-
+     <h3 className={loginStyles.heading}>Signup Form </h3>
 <div className={loginStyles.app}>
-
 		<div className={loginStyles.bg}></div>
-
 		<form className={loginStyles.loginform}>
 			<header className={loginStyles.header}>
 				<img className={loginStyles.image} src="https://jqlacorte.com/wp-content/uploads/2015/09/jql-job-seekers.png?format=auto&height=80&version=1592223909&width=80"/>
-			</header>
+			
+				</header>
 
 			<div className={loginStyles.inputs}>
                <Input className={loginStyles.input}type={"text"} placeholder={"Username"} name={"name"} setInput={setInput}/>
