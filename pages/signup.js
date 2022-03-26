@@ -19,6 +19,7 @@ const signup= () => {
 		 console.log('working.....');
 		 try {
 			 const res=await axios.post('/signup',forminput)
+			 console.log(res);
 			 if(res){
 				 router.push({
 					 pathname:'/',
