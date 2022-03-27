@@ -4,6 +4,7 @@ import Link from 'next/link'
 import  loginStyles from '../styles/Login.module.css';
 import Input from '../components/AuthInput';
 import axios from '../axios'
+import { useSelector } from 'react-redux';
 const signup= () => {
 
     const [forminput,setFormInput] = useState({});
@@ -14,6 +15,8 @@ const signup= () => {
          setFormInput({...forminput,[key]:value})
 
      }
+	 const userDetails = useSelector(state=>state.user.userData)
+	 console.log(userDetails)
 	 const handleSignup= async(e)=>{
 		 e.preventDefault()
 		 console.log('working.....');
