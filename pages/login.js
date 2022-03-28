@@ -24,7 +24,8 @@ const login = () => {
     const { errors } = formState;
 
     const onSubmit = data => console.log(data);
- 
+
+
   return (
     <div>
 <h3 className={loginStyles.heading}>Login </h3>
@@ -48,6 +49,7 @@ const login = () => {
                             <input name="email" type="text" {...register('email')} className={`form-control ${errors.email ? 'is-invalid' : ''}`} />
                             <div className="invalid-feedback">{errors.email?.message}</div>
              </div>
+
 
             <div className="form-group">
                         <button type="submit" className="btn btn-primary mr-1">Register</button>
