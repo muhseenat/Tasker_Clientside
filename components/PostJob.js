@@ -2,7 +2,7 @@
 const PostJob = () => {
   return (
       <>
-      <section class="job py-5">
+      <section class="apply py-5">
           <div class="container py-5">
               <div class="row py-5">
                   <div class ="col-lg-7">

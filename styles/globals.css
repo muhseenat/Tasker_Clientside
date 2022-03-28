@@ -34,7 +34,9 @@ a {
   text-decoration: none;
   box-sizing: border-box;
 }
-
+.red{
+  color: red;
+}
 .btn2 {
   height:70px;
   width:70%;
@@ -52,11 +54,104 @@ a {
   outline:none;
   transition:all 0.4s
 }
-.job-apply{
+.job{
   background:linear-gradient(rgba(4,11,75,0.719),rgba(4,26,100,0.73)),url(https://media.istockphoto.com/photos/close-up-of-unrecognizable-person-opening-office-door-picture-id1206393963?b=1&k=20&m=1206393963&s=170667a&w=0&h=jhwV9p1Al0aYw3WEqU0tirBabR-lZoHXT5PF52Y9AWc=)no-repeat;
+  background-size: cover;
+  height: 90vh;
+  width: 100%;
+
 }
-/*====================*/
+
 .job h1{
-  font-size:3.2rem
-  col
+  font-size:3.8rem;
+}
+
+
+/*====================*/
+.apply h1{
+  font-size:3.5rem;
+  color: rgb(7,7,78);
+}
+.providers{
+  font-size:2.5rem;
+  color: rgb(7,7,78);
+  text-align: center;
+}
+.btn4{height: 60px;
+width: 30%;
+outline: none;
+border: none;
+background: rgb(243, 73, 73);
+color: white;
+transition: all 0.4s;
+}
+.btn4.hover{
+  background: rgb(214,11,11);
+  color: white;
+  transition: all 0.4s;
+  border: none;
+  outline: none;
+}
+.flow{
+  background: url(https://img.freepik.com/free-vector/blue-copy-space-digital-background_23-2148821698.jpg?size=626&ext=jpg)no-repeat;
+  background-size: cover;
+  height: 110vh;
+  width: 100%;
+}
+.flow .card{
+  background-color: rgba(4, 26, 100, 0.801);
+  color: white;
+}
+.cir1{
+  height: 100px;
+  width: 100px;
+  background: white;
+  border-radius: 50%;
+  display: inline-block;
+}
+.cir1 img{
+  border-radius: 50%;
+}
+.avatar{
+  height: 130px;
+  width: 130px;
+  border-radius: 50%;
+}
+.perac{
+  font-size: 1.6rem;
+  font-weight: 300;
+}
+.btn5{
+  height: 60px;
+  width: 30%;
+  outline:none;
+  border: none;
+  background: rgb(243,73,73);
+  cursor: pointer;
+  color: white;
+  border-radius: 5;
+  transition: all 0.4s;
+}
+.btn5:hover{
+  background: rgb(214, 11, 11);
+  border: none;
+  outline: none;
+  transition: all 0.4s;
+}
+.footer{
+  background: #121626;
+  color: white;
+}
+.footer p{
+  margin: 0;
+  color: #69696b;
+}
+.link{
+  color: #6b6b72;
+  transition: all 0.4s;
+}
+.link:hover{
+  color: #ff2962;
+  padding-left: 10px;
+  transition: all 0.4s;
 }
