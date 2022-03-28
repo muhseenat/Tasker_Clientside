@@ -66,7 +66,7 @@ const login = () => {
             <div className="form-group">
             <button className={loginStyles.button} type="submit">Login</button>
 			<p className={loginStyles.para}>Don't have an account?
-            <Link href="/login"><a className={loginStyles.a} >Signup</a></Link></p>
+            <Link href="/signup"><a className={loginStyles.a} >Signup</a></Link></p>
                         {/* <button type="submit" className="btn btn-primary mr-1">Register</button>
                         <button type="button" onClick={() => reset()} className="btn btn-secondary">Reset</button> */}
            </div>

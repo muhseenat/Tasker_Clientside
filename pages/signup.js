@@ -9,41 +9,45 @@ import Input from '../components/AuthInput';
 import axios from '../axios'
 import { useSelector } from 'react-redux';
 const signup= () => {
-
+  
    
 	 const validationSchema=Yup.object().shape({
-        email:Yup.string()
+		name: Yup.string()
+		.required('Name is required'),
+		email:Yup.string()
            .required('Email is required')
            .email('Email is invalid'),
         password:Yup.string()
              .min(6,'Password must be atleast 6 characters')
-             .required('Password is required')   
+             .required('Password is required') ,
+	    confirmPassword: Yup.string()
+			 .oneOf([Yup.ref('password'), null], 'Passwords must match')
+			 .required('Confirm Password is required'),	   
     })
 	//  const userDetails = useSelector(state=>state.user.userData)
 	//  console.log(userDetails)
+    const formOptions = { resolver: yupResolver(validationSchema) };
 
-	const {register,handleSubmit,errors}=useForm({
-		resolver: yupResolver(validationSchema)
-	});
+	const { register, handleSubmit, reset, formState } = useForm(formOptions);
+    const { errors } = formState;
 
-	const onSubmit=(data)=>console.log(data);
 
-	//  const handleSignup= async(e)=>{
-	// 	 e.preventDefault()
-	// 	 console.log('working.....');
-	// 	 try {
-	// 		 const res=await axios.post('/signup',forminput)
-	// 		 console.log(res);
-	// 		 if(res){
-	// 			 router.push({
-	// 				 pathname:'/',
-	// 				 query:{returnUrl:router.asPath}
-	// 			 })
-	// 		 }
-	// 	 } catch (error) {
-	// 		 console.log(error);
-	// 	 }
-	//  }
+	const [error,setError]= useState("")
+
+	 const onSubmit= async(data)=>{
+		 try {
+			 const res=await axios.post('/signup',forminput)
+			 console.log(res);
+			 if(res){
+				 router.push({
+					 pathname:'/',
+					 query:{returnUrl:router.asPath}
+				 })
+			 }
+		 } catch (error) {
+			 console.log(error);
+		 }
+	 }
 	
 	 
   return (
@@ -58,12 +62,24 @@ const signup= () => {
 				</header>
 
 			<div className={loginStyles.inputs}>
-               {/* <Input className={loginStyles.input}  {...register('name')} type={"text"} placeholder={"Username"} name={"name"} setInput={setInput}/> */}
-<Input className={loginStyles.input} type={"email"} placeholder={"Email"}  {...register('email')}  name={"email"} />
-{/* <Input className={loginStyles.input} type={"tel"} placeholder={"Phone number"}  {...register('phone')} name={"phone"} setInput={setInput}/> */}
-<Input className={loginStyles.input} type={"password"} placeholder={"Password"} name={"password"}  {...register('password')} />
-{/* <Input className={loginStyles.input} type={"password"} placeholder={"Confirm Password"} name={"cpassword"}  {...register('cpassword')} setInput={setInput}/> */}
-<div className={loginStyles.errors}>{errors?.password?.message}</div>
+			<div className="form-group col">
+                            <input name="name" type="text" {...register('name')} className={`form-control ${errors.name ? 'is-invalid' : ''}`} placeholder="Enter Username" />
+                            <div className="invalid-feedback">{errors.name?.message}</div>
+                        </div>
+						<div className="form-group col">
+                            <input name="email" type="text" {...register('email')} className={`form-control ${errors.email ? 'is-invalid' : ''}`} placeholder="Enter Email"/>
+                            <div className="invalid-feedback">{errors.email?.message}</div>
+                        </div>
+						<div className="form-group col">
+                            <input name="password" type="password" {...register('password')} className={`form-control ${errors.password ? 'is-invalid' : ''}`} placeholder="Password"/>
+                            <div className="invalid-feedback">{errors.password?.message}</div>
+                        </div>
+                        <div className="form-group col">
+                            <input name="cPassword" type="password" {...register('confirmPassword')} className={`form-control ${errors.confirmPassword ? 'is-invalid' : ''}`} placeholder="Confirm Password"/>
+                            <div className="invalid-feedback">{errors.confirmPassword?.message}</div>
+                        </div>
+               
+{/* <div className={loginStyles.errors}>{errors?.password?.message}</div> */}
 
 
 			</div>
