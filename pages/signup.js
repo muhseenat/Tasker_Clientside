@@ -10,14 +10,7 @@ import axios from '../axios'
 import { useSelector } from 'react-redux';
 const signup= () => {
 
-    const [forminput,setFormInput] = useState({});
-	const router=useRouter();
-     const setInput=(e)=>{
-         const key= e.target.name;
-         const value=e.target.value;
-         setFormInput({...forminput,[key]:value})
-
-     }
+   
 	 const validationSchema=Yup.object().shape({
         email:Yup.string()
            .required('Email is required')
