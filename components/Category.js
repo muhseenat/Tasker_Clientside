@@ -48,6 +48,13 @@ const Category = () => {
    
 
                 </div>
+                <div className="row">
+                    <div className="col-lg-12">
+                        <div className="browse-btn2 text-center mt-50">
+                           <button className='btn2'><a href="#" className="border-btn2 ">Browse All Sectors</a></button> 
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -71,6 +78,31 @@ const Category = () => {
             -webkit-box-shadow: -2px 2px 22px -11px rgba(0,0,0,0.75);
             -moz-box-shadow:  -2px 2px 22px -11px rgba(0,0,0,0.75);
         
+            }
+            .btn2 {
+                height:70px;
+                width:70%;
+                border:1px solid rgb(130,130,231);
+                background:transparent;
+                border-radius:5px;
+                color:rgb(130,130,231);
+                transition:all 0.4s
+            }
+            .btn2:hover {
+              
+                background:rgb(102,102,214);
+                color:white
+                border:none;
+                outline:none;
+                transition:all 0.4s
+            }
+            a{
+                text-decoration:none;
+                color:rgb(130,130,231);
+            }
+
+            a:hover{
+                color:white;
             }
         `
     }
