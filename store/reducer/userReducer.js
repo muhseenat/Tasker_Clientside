@@ -1,7 +1,7 @@
 import ACTION_CONSTANTS from "../actions/actionTypes";
 
 const initialState = {
-  userData:{}
+  // userData:JSON.parse(localStorage.getItem("user"))||{}
   
 }
 

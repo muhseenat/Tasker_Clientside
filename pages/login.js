@@ -38,6 +38,8 @@ const login = () => {
 			 console.log(res);
 			 if(res){
                  dispatch(setUserDetails(res.data))
+                 
+                 localStorage.setItem("user",JSON.stringify(res.data))
 				 router.push({
 					 pathname:'/',
 					 query:{returnUrl:router.asPath}
