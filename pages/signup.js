@@ -32,7 +32,7 @@ const signup= () => {
     const { errors } = formState;
 
 
-	const [error,setError]= useState("")
+	const [signupError,setSignupError]= useState("")
 
 	 const onSubmit= async(data)=>{
 		 try {
@@ -45,8 +45,8 @@ const signup= () => {
 				 })
 			 }
 		 } catch (error) {
-			 console.log(error);
-		 }
+         setSignupError(error.response?.errorMessage)
+		}
 	 }
 	
 	 
@@ -79,13 +79,12 @@ const signup= () => {
                             <div className="invalid-feedback">{errors.confirmPassword?.message}</div>
                         </div>
                
-{/* <div className={loginStyles.errors}>{errors?.password?.message}</div> */}
 
 
 			</div>
 
 
-	
+	   {signupError&&<p className={loginStyles.error}>{ signupError}</p>}
 			<button className={loginStyles.button} type="submit">Signup</button>
 			<p className={loginStyles.para}> Already have an account?
             <Link href="/login"><a className={loginStyles.a} >Login</a></Link></p>

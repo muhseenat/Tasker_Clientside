@@ -6,8 +6,8 @@ import logger from 'redux-logger'
 
 const middleware = [thunk]
 const enhancers = []
-const production = process.env.production || true
-if(production){
+const production = process.env.production || false
+if(!production){
     enhancers.push(applyMiddleware(logger))
 }
 

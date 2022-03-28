@@ -6,8 +6,11 @@ import {yupResolver} from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
 import  loginStyles from '../styles/Login.module.css';
 import axios from '../axios';
-
+import { useDispatch,useSelector } from 'react-redux';
+import {setUserDetails } from '../store/actions/userActions'
 const login = () => {
+
+    const dispatch = useDispatch()
      // form validation rules 
      const validationSchema = Yup.object().shape({
         
@@ -25,21 +28,26 @@ const login = () => {
     // get functions to build form with useForm() hook
     const { register, handleSubmit, reset, formState } = useForm(formOptions);
     const { errors } = formState;
-
-    // const onSubmit = data => console.log(data);
+    const router=useRouter();
+	const [loginError,setLoginError]= useState("")
+    
     const onSubmit = async(data)=>{
 		 console.log('working.....');
 		 try {
-			 const res=await axios.post('/signup',data)
+			 const res=await axios.post('/login',data)
 			 console.log(res);
 			 if(res){
+                 dispatch(setUserDetails(res.data))
 				 router.push({
 					 pathname:'/',
 					 query:{returnUrl:router.asPath}
 				 })
 			 }
 		 } catch (error) {
-			 console.log(error);
+            console.log(error.response)
+            console.log(error);
+            setLoginError(error.response?.data?.err)
+
 		 }
 	 }
 
@@ -64,11 +72,12 @@ const login = () => {
                             <div className="invalid-feedback">{errors.password?.message}</div>
                         </div>
             <div className="form-group">
+	   {loginError&&<p className={loginStyles.error}>{loginError}</p>}
+
             <button className={loginStyles.button} type="submit">Login</button>
 			<p className={loginStyles.para}>Don't have an account?
             <Link href="/signup"><a className={loginStyles.a} >Signup</a></Link></p>
-                        {/* <button type="submit" className="btn btn-primary mr-1">Register</button>
-                        <button type="button" onClick={() => reset()} className="btn btn-secondary">Reset</button> */}
+                        
            </div>
             
 		</form>
