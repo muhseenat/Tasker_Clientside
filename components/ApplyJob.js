@@ -5,7 +5,7 @@ const ApplyJob = () => {
   return (
       <>
       
-      <div className="apply py-5 text-center text-white">
+      <div className="job-apply py-5 text-center text-white">
             <div className="container py-5">
                 <div className="row py-5">
                     <div className="col-lg-10 m-auto">
@@ -26,7 +26,7 @@ const ApplyJob = () => {
       <style jsx>
           {
               `
-              .apply{
+              . job-apply{
                   
                   background-size: cover;
                   height: 90vh;
