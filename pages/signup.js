@@ -5,18 +5,24 @@ import { useForm } from 'react-hook-form';
 import {yupResolver} from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
 import  loginStyles from '../styles/Login.module.css';
-import Input from '../components/AuthInput';
 import axios from '../axios'
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import {setUserDetails } from '../store/actions/userActions'
+
 const signup= () => {
   
-   
+	const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/
+
 	 const validationSchema=Yup.object().shape({
 		name: Yup.string()
 		.required('Name is required'),
 		email:Yup.string()
            .required('Email is required')
            .email('Email is invalid'),
+        phone:Yup.string()
+           .required('Phone is required')
+           .matches(phoneRegExp, 'Phone number is not valid')  ,
+		   
         password:Yup.string()
              .min(6,'Password must be atleast 6 characters')
              .required('Password is required') ,
@@ -24,28 +30,27 @@ const signup= () => {
 			 .oneOf([Yup.ref('password'), null], 'Passwords must match')
 			 .required('Confirm Password is required'),	   
     })
-	//  const userDetails = useSelector(state=>state.user.userData)
-	//  console.log(userDetails)
     const formOptions = { resolver: yupResolver(validationSchema) };
 
-	const { register, handleSubmit, reset, formState } = useForm(formOptions);
+	const { register, handleSubmit,formState } = useForm(formOptions);
     const { errors } = formState;
-
-
+    const dispatch= useDispatch()
+    const router = useRouter();
 	const [signupError,setSignupError]= useState("")
 
 	 const onSubmit= async(data)=>{
+		 console.log(data);
 		 try {
-			 const res=await axios.post('/signup',forminput)
-			 console.log(res);
+			 const res=await axios.post('/signup',data)
 			 if(res){
-				 router.push({
-					 pathname:'/',
-					 query:{returnUrl:router.asPath}
-				 })
-			 }
+				dispatch(setUserDetails(res.data))
+				router.push({
+					pathname:'/',
+					query:{returnUrl:router.asPath}
+				})
+			}
 		 } catch (error) {
-         setSignupError(error.response?.errorMessage)
+         setSignupError(error.response?.data?.err)
 		}
 	 }
 	
@@ -69,6 +74,10 @@ const signup= () => {
 						<div className="form-group col">
                             <input name="email" type="text" {...register('email')} className={`form-control ${errors.email ? 'is-invalid' : ''}`} placeholder="Enter Email"/>
                             <div className="invalid-feedback">{errors.email?.message}</div>
+                        </div>
+						<div className="form-group col">
+                            <input name="phone" type="text" {...register('phone')} className={`form-control ${errors.phone ? 'is-invalid' : ''}`} placeholder="Enter Phone number"/>
+                            <div className="invalid-feedback">{errors.phone?.message}</div>
                         </div>
 						<div className="form-group col">
                             <input name="password" type="password" {...register('password')} className={`form-control ${errors.password ? 'is-invalid' : ''}`} placeholder="Password"/>
