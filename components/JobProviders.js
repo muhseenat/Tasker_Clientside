@@ -15,8 +15,7 @@ const JobProviders = () => {
       <img class="img-fluid avatar mb-4" src="https://images.unsplash.com/photo-1644982647711-9129d2ed7ceb?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxleHBsb3JlLWZlZWR8MjZ8fHxlbnwwfHx8fA%3D%3D&auto=format&fit=crop&w=700&q=60" alt="First slide"/>
     <h4>John Doe</h4>
     <p></p>
-    <p className="perac py-3">"xhvdhvbxmnvbvjkvhjhjkhg"</p>
-    {/* <button className="btn5 mt-3"> </button> */}
+    <p className="perac py-3">"Provided 25 jobs and 25 happy customers "</p>
 
     </div>
     <div class="carousel-item">
@@ -24,7 +23,7 @@ const JobProviders = () => {
       <img class="img-fluid avatar mb-4" src="https://images.unsplash.com/photo-1644982647711-9129d2ed7ceb?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxleHBsb3JlLWZlZWR8MjZ8fHxlbnwwfHx8fA%3D%3D&auto=format&fit=crop&w=700&q=60" alt="Second slide"/>
       <h4>John Doe</h4>
     <p></p>
-    <p className="perac py-3">"xhvdhvbxmnvbvjkvhjhjkhg"</p>
+    <p className="perac py-3">"Provided 25 jobs and 25 happy customers "</p>
     {/* <button className="btn5 mt-3">
         CONTACT </button> */}
     </div>
@@ -32,7 +31,7 @@ const JobProviders = () => {
       <img class="img-fluid avatar mb-4" src="https://images.unsplash.com/photo-1644982647711-9129d2ed7ceb?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxleHBsb3JlLWZlZWR8MjZ8fHxlbnwwfHx8fA%3D%3D&auto=format&fit=crop&w=700&q=60" alt="Third slide"/>
       <h4>John Doe</h4>
     <p></p>
-    <p className="perac py-3">"xhvdhvbxmnvbvjkvhjhjkhg"</p>
+    <p className="perac py-3">"Provided 25 jobs and 25 happy customers "</p>
     {/* <button className="btn5 mt-3"> 
      </button> */}
     </div>

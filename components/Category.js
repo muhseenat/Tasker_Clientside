@@ -1,6 +1,6 @@
-import React from 'react'
 
 const Category = () => {
+
   return (
 <>
 <section className='ceta py-5'>

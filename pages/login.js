@@ -76,7 +76,7 @@ const login = () => {
             <div className="form-group">
 	   {loginError&&<p className={loginStyles.error}>{loginError}</p>}
 
-            <button className={loginStyles.button} type="submit">Login</button>
+            <div className='button'><button className={loginStyles.button} type="submit">Login</button></div>
 			<p className={loginStyles.para}>Don't have an account?
             <Link href="/signup"><a className={loginStyles.a} >Signup</a></Link></p>
                         
@@ -97,6 +97,9 @@ const login = () => {
                .form-group{
                 margin-top:1px  
                 
+               }
+               .button{
+                   margin-top:100px
                }
                @media screen and (max-width: 640px) {
                 #footer{

@@ -10,7 +10,8 @@ const Footer = () => {
                       <div className="col-lg-3">
                           <h3 className="py-5">ABOUT US</h3>
 
-                       <p>gjgkfjgkmvbmtoohfdjkghjgh</p>
+                       <p>Our Team will help you to find suitable job<br/>
+                       And find you suitable partner for your job.</p>
                       </div>
                       <div className="col-lg-3">
                           <h3 className="py-5">CONTACT US</h3>

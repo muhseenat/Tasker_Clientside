@@ -8,8 +8,8 @@ const PostJob = () => {
                   <div class ="col-lg-7">
                       <p class="red pt-5">WHAT WE ARE DOING</p>
                       <h1>24k Talented people are getting Jobs</h1>
-                      <p class="py-4">  njjgfjdgljhlfgkjhklgjhlj</p>
-                      <p>nbnb,vmlkhhkjhgkj;lhgk;ljkhgl;kj</p>
+                      <p class="py-4"></p>
+                      <p>Post your works here and find suitable partner.</p>
                       <button className="btn4 mt-3">POST A JOB</button>
                   </div>
                   <div className="col-lg-5">

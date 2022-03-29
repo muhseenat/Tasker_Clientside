@@ -6,3 +6,9 @@ export const setUserDetails = (data) => dispatch =>{
         payload:data
     })
 }
+export const testData = (data) => dispatch =>{
+    dispatch({
+        type:ACTION_CONSTANTS.JOB_DETAILS,
+        payload:data
+    })
+}

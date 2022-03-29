@@ -94,7 +94,7 @@ const signup= () => {
 
 
 	   {signupError&&<p className={loginStyles.error}>{ signupError}</p>}
-			<button className={loginStyles.button} type="submit">Signup</button>
+			<div className='button'><button className={loginStyles.button} type="submit">Signup</button></div>
 			<p className={loginStyles.para}> Already have an account?
             <Link href="/login"><a className={loginStyles.a} >Login</a></Link></p>
 	

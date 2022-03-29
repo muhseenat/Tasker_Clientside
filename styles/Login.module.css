@@ -132,6 +132,7 @@
 	    font-family: 'Poppins', sans-serif;
 	    outline: none;
 	    color: #fff;
+		margin-top: 35px;
 	}
 	
 	@media screen and (max-width: 640px) {
