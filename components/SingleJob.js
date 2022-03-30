@@ -1,6 +1,6 @@
 import React,{useEffect, useState} from 'react'
 import axios from '../axios'
-
+import Link from 'next/link'
 
 const SingleJob = () => {
 
@@ -40,7 +40,7 @@ const SingleJob = () => {
 
            <p className="card-text">Skills Required:{job.skills}</p>
            <p className="card-text"><small className="text-muted">{new Date(job.from).toDateString()}-{new Date(job.to).toDateString()}</small></p>
-           <button className='btn btn-primary'>APPLY</button>
+           <Link href='applyJob'><button className='btn btn-primary'>APPLY</button></Link>
          </div>
        </div>
      </div>
