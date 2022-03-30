@@ -1,4 +1,3 @@
-import { setUserDetails } from "../store/actions/userActions"
 import { useSelector,useDispatch } from "react-redux"
 import MainSection from "../components/MainSection"
 import Category from "../components/Category"

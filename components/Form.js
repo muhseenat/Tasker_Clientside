@@ -1,13 +1,17 @@
 import React,{useState} from 'react'
 import axios from '../axios';
 import { useRouter } from 'next/router';
+import { useSelector } from 'react-redux';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 const Form = () => {
-   const categories=['electrician','developer','plumber','doctor']
+const categories=['electrician','developer','plumber','doctor'];
+const user=useSelector(state=>state.user.userData)
     const router = useRouter();
     let data={
+         user_id:user?._id,
         job_designation:"",
+        job_desc:"",
         category:"",
         province:"",
         city:"",
@@ -26,7 +30,6 @@ const Form = () => {
       };
 
 const handlePost=async(e)=>{
-    alert('why not working.....')
     e.preventDefault()
     console.log(formData);
     try {
@@ -50,9 +53,13 @@ const handlePost=async(e)=>{
       <input type="text" className="form-control"  name="job_designation" onChange={(e)=>updateFormData(e)}/>
     </div>
     <div className="form-group col-md-6 m-3">
+      <label name="inputEmail4">Job Description</label>
+      <input type="text-area" className="form-control"  name="job_desc" onChange={(e)=>updateFormData(e)}/>
+    </div>
+    <div className="form-group col-md-6 m-3">
       <label name="inputPassword4">Category</label>
-      <select id="inputState"  onChange={(e)=>updateFormData(e)} className="form-control">
-       {categories.map((i,index)=> <option name="category" key={index}>{i}</option>)}
+      <select id="inputState"  name="category"  onChange={(e)=>updateFormData(e)} className="form-control">
+       {categories.map((category,index)=> <option key={index}>{category}</option>)}
     
       </select>
     </div>
