@@ -5,9 +5,11 @@ import axios from '../axios'
 
 
 const ApplyJobForm = () => {
-   const user = useSelector(state=>state.user.userData._id);
+   const user_id = useSelector(state=>state.user.userData._id);
    const router = useRouter();
     const formData={
+        job_id:"",
+        tasker_id:"",
         name:"",
         place:"",
         phone:"",
@@ -25,9 +27,9 @@ console.log(user);
     
    const handleSubmit=(e)=>{
        e.preventDefault();
-       const data ={...resume,user}
+       const data ={...resume,user_id}
        console.log(data,'this is gong data');
-       axios.post('/apply',data).then((res)=>{
+       axios.post('/apply/job',data).then((res)=>{
          router.push('/jobs');
        }).catch(err=>console.log(err))
    }
@@ -49,7 +51,7 @@ console.log(user);
       <input placeholder="Your Phone Number (optional)" type="tel" name='phone' onChange={(e)=>updateFormData(e)} tabindex="3" />
     </fieldset>
     <fieldset>
-      <input placeholder="Your Qualification" type="text"  name='qualification'onChange={(e)=>updateFormData(e)} tabindex="4" />
+      <input placeholder="Your Qualification" type="text"  name='qualification' onChange={(e)=>updateFormData(e)} tabindex="4" />
     </fieldset>
     <fieldset>
       <input placeholder="Skills" type="text" tabindex="4" name='skill' onChange={(e)=>updateFormData(e)} required/>
