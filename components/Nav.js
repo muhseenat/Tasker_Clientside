@@ -26,8 +26,10 @@ function AppBar() {
           style={{ maxHeight: '100px' }}
           navbarScroll
         >
-          <Nav.Link href="#action1">Home</Nav.Link>
-          <Nav.Link href="#action2">Jobs</Nav.Link>
+          <Link href='/'><Nav.Link>Home</Nav.Link></Link>
+          <Link href='/jobs'><Nav.Link>Jobs</Nav.Link></Link>
+        <Link href='/login'><a className='btn btn-success'  style={{marginLeft:"10px"}} >Login</a></Link>
+
         
         </Nav>
         <Form className="d-flex justify-content-center">

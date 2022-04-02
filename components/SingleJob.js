@@ -40,7 +40,7 @@ const SingleJob = () => {
 
            <p className="card-text">Skills Required:{job.skills}</p>
            <p className="card-text"><small className="text-muted">{new Date(job.from).toDateString()}-{new Date(job.to).toDateString()}</small></p>
-           <Link href='applyJob'><button className='btn btn-primary'>APPLY</button></Link>
+           <Link href='apply/i123'><button className='btn btn-primary'>APPLY</button></Link>
          </div>
        </div>
      </div>

@@ -80,6 +80,7 @@ a {
 width: 30%;
 outline: none;
 border: none;
+border-radius: 15px;
 background: rgb(243, 73, 73);
 color: white;
 transition: all 0.4s;

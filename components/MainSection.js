@@ -1,5 +1,5 @@
 import React from 'react'
-
+import Link from 'next/link'
 const MainSection = () => {
   return (
     <>
@@ -10,9 +10,9 @@ const MainSection = () => {
                 <div className='col-lg-7'>
                     <h1>Find The Most Exciting <br/>
                     Jobs</h1>
-                    <button className='btn1'>
+                    <Link href='/jobs'><button className='btn1'>
                        Find Jobs
-                    </button>
+                    </button></Link>
                 </div>
             </div>
         </div>
@@ -35,7 +35,7 @@ const MainSection = () => {
                .btn1{
                    height:70px;
                    width:25%;
-                   background-color:rgb(243,73,73);
+                   background-color:blue;
                    color:white;
                    border:none;
                    outline:none;
@@ -44,7 +44,7 @@ const MainSection = () => {
 
                }   
                .btn1:hover{
-                   background:rgb(214,11,11);
+                   background:blue;
                    transition:all 0.4s;
                }   `
         }

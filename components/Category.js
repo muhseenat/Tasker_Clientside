@@ -81,7 +81,7 @@ const Category = () => {
             }
             .btn2 {
                 height:70px;
-                width:70%;
+                width:20%;
                 border:1px solid rgb(130,130,231);
                 background:transparent;
                 border-radius:5px;

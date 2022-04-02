@@ -5,11 +5,10 @@ import axios from '../axios'
 
 
 const ApplyJobForm = () => {
-   const user_id = useSelector(state=>state.user.userData._id);
+   const user_id = useSelector(state=>state.user?.userData?._id);
    const router = useRouter();
     const formData={
         job_id:"",
-        tasker_id:"",
         name:"",
         place:"",
         phone:"",
@@ -18,7 +17,7 @@ const ApplyJobForm = () => {
         experience:""
     }
     const [resume,setResume] =useState(formData)
-console.log(user);
+// console.log(user);
     const updateFormData=(e)=>{
        const name = e.target.name;
        const value =e.target.value;
