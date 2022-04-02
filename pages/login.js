@@ -16,22 +16,22 @@ import {setUserDetails } from '../store/actions/userActions'
 
 const login = () => { 
     
-    const [open, setOpen] = useState(false);
+    // const [open, setOpen] = useState(false);
 
-    const Alert = React.forwardRef(function Alert(props, ref) {
-        return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
-      });
-    const handleClick = () => {
-      setOpen(true);
-    };
+    // const Alert = React.forwardRef(function Alert(props, ref) {
+    //     return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+    //   });
+    // const handleClick = () => {
+    //   setOpen(true);
+    // };
   
-    const handleClose = (event, reason) => {
-      if (reason === 'clickaway') {
-        return;
-      }
+    // const handleClose = (event, reason) => {
+    //   if (reason === 'clickaway') {
+    //     return;
+    //   }
   
-      setOpen(false);
-    };
+    //   setOpen(false);
+    // };
 
 
     const dispatch = useDispatch()
@@ -73,7 +73,7 @@ const login = () => {
             console.log(error.response)
             console.log(error);
             setLoginError(error.response?.data?.err)
-            handleClick()
+            // handleClick()
 
 		 }
 	 }
@@ -81,11 +81,11 @@ const login = () => {
   return (
       <>
   
-{loginError&&<Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+{/* {loginError&&<Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
   <Alert onClose={handleClose} severity="error" sx={{ width: '100%' }}>
     This is a success message!
   </Alert>
-</Snackbar>}
+</Snackbar>} */}
 {/* 
 <Stack spacing={2} sx={{ width: '100%' }}>
       <Button variant="outlined" onClick={handleClick}>

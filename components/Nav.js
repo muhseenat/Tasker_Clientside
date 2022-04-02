@@ -1,19 +1,12 @@
 import {Navbar,Container,Nav,NavDropdown,Form,FormControl,Button} from 'react-bootstrap'
 import styles from '.././styles/Navbar.module.css'
 import {useSelector,useDispatch} from 'react-redux';
-import { setUserDetails } from '../store/actions/userActions';
 import Link from 'next/link'
 
 function AppBar() {
-  const dispatch =useDispatch();
   const user =useSelector(state=>state.user.userData);
 
-  const handleLogout=()=>{
-    alert('its working')
-    localStorage.clear();
-    dispatch(setUserDetails(null))
-    
-  }
+
   return (
     <>
     <Navbar bg="light" style={{margin: "0"}}  text="white" expand="sm" sticky="top" >
@@ -28,7 +21,6 @@ function AppBar() {
         >
           <Link href='/'><Nav.Link>Home</Nav.Link></Link>
           <Link href='/jobs'><Nav.Link>Jobs</Nav.Link></Link>
-        <Link href='/login'><a className='btn btn-success'  style={{marginLeft:"10px"}} >Login</a></Link>
 
         
         </Nav>
@@ -39,17 +31,50 @@ function AppBar() {
             className="me-2"
             aria-label="Search"
           />
-          <Button variant="success" style={{marginRight:"10px"}}>Search</Button>
+          <a className='btn btn-success' style={{marginRight:"10px"}}>Search</a>
         </Form>
         <Form >
-        {user ? <Button  onClick={handleLogout} variant="success" style={{marginLeft:"10px"}} >Logout</Button>:
-        <Link href='/login'><a className='btn btn-success'  style={{marginLeft:"10px"}} >Login</a></Link>
+        {user ?<Link href='/profile'><a className='btn btn-success' >My Account</a></Link>
+:
+        <Link href='/login'><a className='btn btn-success'>Login</a></Link>
         }
 
         </Form>
       </Navbar.Collapse>
     </Container>
   </Navbar>
+
+  <style jsx>
+
+    {
+      `
+      .btn-success{
+        background: #03bfbc;
+        border: 1px solid #03bfbc;
+        padding: 10px 25px;
+        color: #231e39;
+        border-radius:15px;
+        font-family: Montserrat, sans-serif;
+        cursor: pointer;
+        margin-left: 10px;
+        background: transparent;
+        color: #02899c;
+      }
+    
+       .btn-success:hover{
+        color: #fff;
+        background: #231e39;
+        transition: .5s;
+        background:rgb(102,102,214);
+        color:white;
+        border:none;
+        outline:none;
+        transition:all 0.4s
+      }
+      
+      `
+    }
+  </style>
   </>
   )
 }

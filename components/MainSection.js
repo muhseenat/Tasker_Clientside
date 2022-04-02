@@ -41,11 +41,16 @@ const MainSection = () => {
                    outline:none;
                    cursor:pointer;
                    transition:all .4s;
+                   border-radius:15px;
 
                }   
                .btn1:hover{
                    background:blue;
                    transition:all 0.4s;
+                   color: #fff;
+                   background: rgb(7,7,78);
+                   transition: .5s;
+                   font-size:20px;
                }   `
         }
     </style>

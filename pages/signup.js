@@ -44,6 +44,8 @@ const signup= () => {
 			 const res=await axios.post('/signup',data)
 			 if(res){
 				dispatch(setUserDetails(res.data))
+				localStorage.setItem("user",JSON.stringify(res.data))
+
 				router.push({
 					pathname:'/',
 					query:{returnUrl:router.asPath}

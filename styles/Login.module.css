@@ -7,7 +7,7 @@
     text-align: center;
     margin-top: 10px;
     padding: 10px;
-    color: #257aa6;
+    color: #231e39;;
 }
 	
 
@@ -33,7 +33,7 @@
 
 	.a {
 		text-decoration: none;
-		color: #257aa6;
+		color: #231e39;;
 	}
 
 	.para {
@@ -52,7 +52,7 @@
 	.bg {
 		width: 400px;
 		height: 550px;
-		background: #257aa6;
+		background: #231e39;
 		position: absolute;
 		top: -5em;
 		left: 0;
@@ -128,7 +128,7 @@
 	    padding: 13px 15px;
 	    border-radius: 100px;
 	    border: none;
-	    background: #257aa6;
+	    background: #231e39;;
 	    font-family: 'Poppins', sans-serif;
 	    outline: none;
 	    color: #fff;
