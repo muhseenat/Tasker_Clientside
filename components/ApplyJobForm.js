@@ -7,8 +7,11 @@ import axios from '../axios'
 const ApplyJobForm = () => {
    const user_id = useSelector(state=>state.user?.userData?._id);
    const router = useRouter();
+   const { id } = router.query
+
     const formData={
-        job_id:"",
+        user_id,
+        job_id:id,
         name:"",
         place:"",
         phone:"",
@@ -16,17 +19,16 @@ const ApplyJobForm = () => {
         skill:"",
         experience:""
     }
-    const [resume,setResume] =useState(formData)
-// console.log(user);
+    const [data,setData] =useState(formData)
     const updateFormData=(e)=>{
        const name = e.target.name;
        const value =e.target.value;
-       setResume({...resume,[name]:value});
+       setData({...data,[name]:value});
     }
     
    const handleSubmit=(e)=>{
        e.preventDefault();
-       const data ={...resume,user_id}
+       
        console.log(data,'this is gong data');
        axios.post('/apply/job',data).then((res)=>{
          router.push('/jobs');

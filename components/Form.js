@@ -1,12 +1,19 @@
-import React,{useState} from 'react'
+import React,{useState,useEffect} from 'react'
 import axios from '../axios';
 import { useRouter } from 'next/router';
 import { useSelector } from 'react-redux';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 const Form = () => {
-const categories=['electrician','developer','plumber','doctor'];
+const categories=['ELECTRICIAN','SOFTWARE ENGINEER','PLUMBER','GARDENER'];
+// const [categories,setCategories]=useState([])
 const user=useSelector(state=>state.user.userData)
+useEffect(()=>{
+   axios.get('/admin/get/category').then((resp)=>{
+     console.log(resp);
+     setCategories(resp.data)
+   }).catch(err=>console.log(err))
+},[])
     const router = useRouter();
     let data={
          user_id:user?._id,
@@ -59,7 +66,7 @@ const handlePost=async(e)=>{
     <div className="form-group col-md-6 m-3">
       <label name="inputPassword4">Category</label>
       <select id="inputState"  name="category"  onChange={(e)=>updateFormData(e)} className="form-control">
-       {categories.map((category,index)=> <option key={index}>{category}</option>)}
+       {categories.map((category,index)=> {return(<option key={index}>{category}</option>)})}
     
       </select>
     </div>
