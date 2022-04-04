@@ -30,7 +30,7 @@ const Footer = () => {
                                 </div>
                             </div>
                             <hr />
-                            <p className="py-4">Copyright @2022 All rights reserved <span className="red">Tasker</span></p>
+                            <p className="py-4">Copyright @2022 All rights reserved <span style={{color:'purple'}}>Tasker</span></p>
                         </div>
                     </div>
                 </div>

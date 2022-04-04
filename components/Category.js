@@ -14,7 +14,7 @@ const Category = () => {
                                         <div className='card-body'>
                                             <img src="https://jqlacorte.com/wp-content/uploads/2015/09/jql-job-seekers.png?format=auto&height=80&version=1592223909&width=80" className='img-fluid' />
                                             <h6>Electrician</h6>
-                                            <h6 className='red'>1000-20000</h6>
+                                            <h6 className='red'>(25)</h6>
                                         </div>
                                     </div>
                                 </div>
@@ -23,7 +23,7 @@ const Category = () => {
                                         <div className='card-body'>
                                             <img src="https://jqlacorte.com/wp-content/uploads/2015/09/jql-job-seekers.png?format=auto&height=80&version=1592223909&width=80" className='img-fluid' />
                                             <h6>Electrician</h6>
-                                            <h6 className='red'>1000-20000</h6>
+                                            <h6 className='red'>(25)</h6>
                                         </div>
                                     </div>
                                 </div>
@@ -32,7 +32,7 @@ const Category = () => {
                                         <div className='card-body'>
                                             <img src="https://jqlacorte.com/wp-content/uploads/2015/09/jql-job-seekers.png?format=auto&height=80&version=1592223909&width=80" className='img-fluid' />
                                             <h6>Electrician</h6>
-                                            <h6 className='red'>1000-20000</h6>
+                                            <h6 className='red'>(25)</h6>
                                         </div>
                                     </div>
                                 </div>
@@ -41,7 +41,7 @@ const Category = () => {
                                         <div className='card-body'>
                                             <img src="https://jqlacorte.com/wp-content/uploads/2015/09/jql-job-seekers.png?format=auto&height=80&version=1592223909&width=80" className='img-fluid' />
                                             <h6>Electrician</h6>
-                                            <h6 className='red'>1000-20000</h6>
+                                            <h6 className='red'>(25)</h6>
                                         </div>
                                     </div>
                                 </div>

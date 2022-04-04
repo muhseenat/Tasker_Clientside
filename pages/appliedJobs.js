@@ -1,11 +1,11 @@
 import React from 'react'
 import AppBar from '../components/Nav'
-import AppliedJobs from '../components/AppliedJobs'
+import DataTable from '../components/DataTable'
 const appliedJobs = () => {
   return (
     <>
     <AppBar/>
-    <AppliedJobs/>
+    <DataTable/>
     
     </>
   )

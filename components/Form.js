@@ -10,15 +10,28 @@ const Form = () => {
   // const [categories,setCategories]=useState([])
   const user = useSelector(state => state.user.userData)
   const router = useRouter();
-  if (!user) {
-    router.push('/login')
-  }
+  // if (!user) {
+  //   router.push('/login')
+  // }
+
+var today = new Date();
+var dd = today.getDate();
+var mm = today.getMonth()+1; 
+var yyyy = today.getFullYear();
+if(dd<10){
+  dd='0'+dd
+} 
+if(mm<10){
+  mm='0'+mm
+} 
+
+const fromDate = yyyy+'-'+mm+'-'+dd;
 
   useEffect(() => {
 
     axios.get('/admin/get/category').then((resp) => {
       console.log(resp);
-      setCategories(resp.data)
+      // setCategories(resp.data)
     }).catch(err => console.log(err))
   }, [])
   let data = {
@@ -64,11 +77,11 @@ const Form = () => {
         <div className="form-row ">
           <div className="form-group col-md-6 m-3">
             <label name="inputEmail4">Job Designation</label>
-            <input type="text" className="form-control" name="job_designation" onChange={(e) => updateFormData(e)} />
+            <input type="text" className="form-control" name="job_designation" onChange={(e) => updateFormData(e)} required/>
           </div>
           <div className="form-group col-md-6 m-3">
             <label name="inputEmail4">Job Description</label>
-            <input type="text-area" className="form-control" name="job_desc" onChange={(e) => updateFormData(e)} />
+            <input type="text-area" className="form-control" name="job_desc" onChange={(e) => updateFormData(e)} required />
           </div>
           <div className="form-group col-md-6 m-3">
             <label name="inputPassword4">Category</label>
@@ -80,27 +93,27 @@ const Form = () => {
         </div>
         <div className="form-group col-md-6 m-3">
           <label name="inputAddress">Province</label>
-          <input type="text" className="form-control" id="inputAddress" name="province" onChange={(e) => updateFormData(e)} />
+          <input type="text" className="form-control" id="inputAddress" name="province" onChange={(e) => updateFormData(e)} required/>
         </div>
         <div className="form-group col-md-6 m-3">
           <label name="inputAddress2">City</label>
-          <input type="text" className="form-control" id="inputAddress2" name="city" onChange={(e) => updateFormData(e)} />
+          <input type="text" className="form-control" id="inputAddress2" name="city" onChange={(e) => updateFormData(e)} required />
         </div>
         <div className="form-row ">
           <div className="form-group col-md-6 m-3">
             <label name="inputCity">Minimum Payment</label>
-            <input type="text" className="form-control" id="inputCity" name="minimum_pay" onChange={(e) => updateFormData(e)} />
+            <input type="text" className="form-control" id="inputCity" name="minimum_pay" onChange={(e) => updateFormData(e)} required/>
           </div>
 
           <div className="form-group col-md-6 m-3">
             <label name="skills">Skills Required</label>
-            <input type="text" className="form-control" name="skills" onChange={(e) => updateFormData(e)} />
+            <input type="text" className="form-control" name="skills" onChange={(e) => updateFormData(e)} required />
           </div>
           <div className="form-group col-md-4 m-3">
             <label name="inputState">Time Period From:</label>
-            <input type="date" className="form-control" id="inputCity" name="from" onChange={(e) => updateFormData(e)} />
+            <input type="date" min={fromDate} className="form-control" id="inputCity" name="from" onChange={(e) => updateFormData(e)} required />
             <label name="inputState">To:</label>
-            <input type="date" className="form-control" id="inputCity" name="to" onChange={(e) => updateFormData(e)} />
+            <input type="date"  min={fromDate} className="form-control" id="inputCity" name="to" onChange={(e) => updateFormData(e)} required />
           </div>
         </div>
         <div className="text-right">
