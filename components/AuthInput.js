@@ -1,10 +1,10 @@
 
 
-const AuthInput = ({setInput,type,placeholder,name}) => {
+const AuthInput = ({ setInput, type, placeholder, name }) => {
 
   return (
     <div className="fform-controoool">
-        <input type={type} placeholder={placeholder} name={name} onChange={(e)=>setInput(e)}/>
+      <input type={type} placeholder={placeholder} name={name} onChange={(e) => setInput(e)} />
     </div>
   )
 }

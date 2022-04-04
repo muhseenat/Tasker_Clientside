@@ -81,17 +81,18 @@ a{
   color: rgb(7,7,78);
   text-align: center;
 }
-.btn4{height: 60px;
+.btn4{
+height: 60px;
 width: 30%;
 outline: none;
 border: none;
 border-radius: 15px;
-background: rgb(243, 73, 73);
+background:rgb(13, 13, 136);
 color: white;
 transition: all 0.4s;
 }
 .btn4.hover{
-  background: rgb(214,11,11);
+  background:rgb(2, 2, 48);
   color: white;
   transition: all 0.4s;
   border: none;

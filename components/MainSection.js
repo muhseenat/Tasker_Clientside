@@ -1,25 +1,25 @@
 import React from 'react'
 import Link from 'next/link'
 const MainSection = () => {
-  return (
-    <>
-   
-    <section className='main py-5'>
-        <div className='container py-5'>
-            <div className='row'>
-                <div className='col-lg-7'>
-                    <h1>Find The Most Exciting <br/>
-                    Jobs</h1>
-                    <Link href='/jobs'><button className='btn1'>
-                       Find Jobs
-                    </button></Link>
+    return (
+        <>
+
+            <section className='main py-5'>
+                <div className='container py-5'>
+                    <div className='row'>
+                        <div className='col-lg-7'>
+                            <h1>Find The Most Exciting <br />
+                                Jobs</h1>
+                            <Link href='/jobs'><button className='btn1'>
+                                Find Jobs
+                            </button></Link>
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </div>
-    </section>
-    <style jsx>
-        {
-            `
+            </section>
+            <style jsx>
+                {
+                    `
                 .main{
                  background:url(https://media.istockphoto.com/photos/portrait-of-cheerful-modern-female-professional-in-modern-office-picture-id1147107125?b=1&k=20&m=1147107125&s=170667a&w=0&h=-siRzIEgjeAQJ445XdDmVd786GeYMG57BAO3iWX8uJc=)no-repeat;
                  background-size:cover;
@@ -52,11 +52,11 @@ const MainSection = () => {
                    transition: .5s;
                    font-size:20px;
                }   `
-        }
-    </style>
+                }
+            </style>
 
-    </>
-  )
+        </>
+    )
 }
 
 export default MainSection

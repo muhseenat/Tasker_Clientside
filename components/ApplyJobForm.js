@@ -1,77 +1,77 @@
 import { useRouter } from 'next/router';
-import React,{useState,useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import axios from '../axios'
 
 
 const ApplyJobForm = () => {
-   const user = useSelector(state=>state.user?.userData);
-   const router = useRouter();
-   const { id } = router.query
+  const user = useSelector(state => state.user?.userData);
+  const router = useRouter();
+  const { id } = router.query
 
-    if(!user){
-      router.push('/login')
-    }
-    const formData={
-        user_id:user?._id,
-        job_id:id,
-        name:"",
-        place:"",
-        phone:"",
-        qualification:"",
-        skill:"",
-        experience:""
-    }
-    const [data,setData] =useState(formData)
-    const updateFormData=(e)=>{
-       const name = e.target.name;
-       const value =e.target.value;
-       setData({...data,[name]:value});
-    }
-    
-   const handleSubmit=(e)=>{
-       e.preventDefault();
-       
-       console.log(data,'this is gong data');
-       axios.post('/apply/job',data).then((res)=>{
-         router.push('/jobs');
-       }).catch(err=>console.log(err))
-   }
+  if (!user) {
+    router.push('/login')
+  }
+  const formData = {
+    user_id: user?._id,
+    job_id: id,
+    name: "",
+    place: "",
+    phone: "",
+    qualification: "",
+    skill: "",
+    experience: ""
+  }
+  const [data, setData] = useState(formData)
+  const updateFormData = (e) => {
+    const name = e.target.name;
+    const value = e.target.value;
+    setData({ ...data, [name]: value });
+  }
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    console.log(data, 'this is gong data');
+    axios.post('/apply/job', data).then((res) => {
+      router.push('/jobs');
+    }).catch(err => console.log(err))
+  }
 
 
   return (
     <div>
 
-<div className="container">  
-  <form id="contact" action="" method="post" onSubmit={handleSubmit}>
-    <h3>Apply Form</h3>
-    <fieldset>
-      <input placeholder="Your Name" type="text" tabindex="1"  name='name'   required autofocus onChange={(e)=>updateFormData(e)}/>
-    </fieldset>
-    <fieldset>
-      <input placeholder="Your Place" type="text" tabindex="2" name='place' onChange={(e)=>updateFormData(e)} required/>
-    </fieldset>
-    <fieldset>
-      <input placeholder="Your Phone Number (optional)" type="tel" name='phone' onChange={(e)=>updateFormData(e)} tabindex="3" />
-    </fieldset>
-    <fieldset>
-      <input placeholder="Your Qualification" type="text"  name='qualification' onChange={(e)=>updateFormData(e)} tabindex="4" />
-    </fieldset>
-    <fieldset>
-      <input placeholder="Skills" type="text" tabindex="4" name='skill' onChange={(e)=>updateFormData(e)} required/>
-    </fieldset>
-    <fieldset>
-      <textarea placeholder="Any Experience" tabindex="5"  name='experience' onChange={(e)=>updateFormData(e)} required></textarea>
-    </fieldset>
-    <fieldset>
-      <button name="submit" type="submit" id="contact-submit" data-submit="...Sending">Submit</button>
-    </fieldset>
-  </form>
-</div>
+      <div className="container">
+        <form id="contact" action="" method="post" onSubmit={handleSubmit}>
+          <h3>Apply Form</h3>
+          <fieldset>
+            <input placeholder="Your Name" type="text" tabindex="1" name='name' required autofocus onChange={(e) => updateFormData(e)} />
+          </fieldset>
+          <fieldset>
+            <input placeholder="Your Place" type="text" tabindex="2" name='place' onChange={(e) => updateFormData(e)} required />
+          </fieldset>
+          <fieldset>
+            <input placeholder="Your Phone Number (optional)" type="tel" name='phone' onChange={(e) => updateFormData(e)} tabindex="3" />
+          </fieldset>
+          <fieldset>
+            <input placeholder="Your Qualification" type="text" name='qualification' onChange={(e) => updateFormData(e)} tabindex="4" />
+          </fieldset>
+          <fieldset>
+            <input placeholder="Skills" type="text" tabindex="4" name='skill' onChange={(e) => updateFormData(e)} required />
+          </fieldset>
+          <fieldset>
+            <textarea placeholder="Any Experience" tabindex="5" name='experience' onChange={(e) => updateFormData(e)} required></textarea>
+          </fieldset>
+          <fieldset>
+            <button name="submit" type="submit" id="contact-submit" data-submit="...Sending">Submit</button>
+          </fieldset>
+        </form>
+      </div>
 
-<style jsx>
-    {
-        `
+      <style jsx>
+        {
+          `
         
         @import url(https://fonts.googleapis.com/css?family=Roboto:400,300,600,400italic);
 * {
@@ -219,8 +219,8 @@ fieldset {
 }
         
         `
-    }
-</style>
+        }
+      </style>
 
     </div>
   )

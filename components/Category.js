@@ -1,68 +1,68 @@
 
 const Category = () => {
 
-  return (
-<>
-<section className='ceta py-5'>
-    <div className='container-fluid py-5 text-center'>
-        <h1>Browse Top Catagories</h1>
-        <div className='row py-5'>
-            <div className='col-lg-11 m-auto pt-3'>
-                <div className='row py-5'>
-                   <div className='col-lg-3'>
-                       <div className='card py-3'>
-                           <div className='card-body'>
-                            <img src="https://jqlacorte.com/wp-content/uploads/2015/09/jql-job-seekers.png?format=auto&height=80&version=1592223909&width=80" className='img-fluid'/>
-                            <h6>Electrician</h6>
-                            <h6 className='red'>1000-20000</h6>
-                           </div>
-                       </div>
-                   </div>
-                   <div className='col-lg-3'>
-                       <div className='card py-3'>
-                           <div className='card-body'>
-                            <img src="https://jqlacorte.com/wp-content/uploads/2015/09/jql-job-seekers.png?format=auto&height=80&version=1592223909&width=80" className='img-fluid'/>
-                            <h6>Electrician</h6>
-                            <h6 className='red'>1000-20000</h6>
-                           </div>
-                       </div>
-                   </div>
-                   <div className='col-lg-3'>
-                       <div className='card py-3'>
-                           <div className='card-body'>
-                            <img src="https://jqlacorte.com/wp-content/uploads/2015/09/jql-job-seekers.png?format=auto&height=80&version=1592223909&width=80" className='img-fluid'/>
-                            <h6>Electrician</h6>
-                            <h6 className='red'>1000-20000</h6>
-                           </div>
-                       </div>
-                   </div>
-                   <div className='col-lg-3'>
-                       <div className='card py-3'>
-                           <div className='card-body'>
-                            <img src="https://jqlacorte.com/wp-content/uploads/2015/09/jql-job-seekers.png?format=auto&height=80&version=1592223909&width=80" className='img-fluid'/>
-                            <h6>Electrician</h6>
-                            <h6 className='red'>1000-20000</h6>
-                           </div>
-                       </div>
-                   </div>
-   
+    return (
+        <>
+            <section className='ceta py-5'>
+                <div className='container-fluid py-5 text-center'>
+                    <h1>Browse Top Catagories</h1>
+                    <div className='row py-5'>
+                        <div className='col-lg-11 m-auto pt-3'>
+                            <div className='row py-5'>
+                                <div className='col-lg-3'>
+                                    <div className='card py-3'>
+                                        <div className='card-body'>
+                                            <img src="https://jqlacorte.com/wp-content/uploads/2015/09/jql-job-seekers.png?format=auto&height=80&version=1592223909&width=80" className='img-fluid' />
+                                            <h6>Electrician</h6>
+                                            <h6 className='red'>1000-20000</h6>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className='col-lg-3'>
+                                    <div className='card py-3'>
+                                        <div className='card-body'>
+                                            <img src="https://jqlacorte.com/wp-content/uploads/2015/09/jql-job-seekers.png?format=auto&height=80&version=1592223909&width=80" className='img-fluid' />
+                                            <h6>Electrician</h6>
+                                            <h6 className='red'>1000-20000</h6>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className='col-lg-3'>
+                                    <div className='card py-3'>
+                                        <div className='card-body'>
+                                            <img src="https://jqlacorte.com/wp-content/uploads/2015/09/jql-job-seekers.png?format=auto&height=80&version=1592223909&width=80" className='img-fluid' />
+                                            <h6>Electrician</h6>
+                                            <h6 className='red'>1000-20000</h6>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className='col-lg-3'>
+                                    <div className='card py-3'>
+                                        <div className='card-body'>
+                                            <img src="https://jqlacorte.com/wp-content/uploads/2015/09/jql-job-seekers.png?format=auto&height=80&version=1592223909&width=80" className='img-fluid' />
+                                            <h6>Electrician</h6>
+                                            <h6 className='red'>1000-20000</h6>
+                                        </div>
+                                    </div>
+                                </div>
 
-                </div>
-                <div className="row">
-                    <div className="col-lg-12">
-                        <div className="browse-btn2 text-center mt-50">
-                           <button className='btn2'><a href="#" className="border-btn2 ">Browse All Sectors</a></button> 
+
+                            </div>
+                            <div className="row">
+                                <div className="col-lg-12">
+                                    <div className="browse-btn2 text-center mt-50">
+                                        <button className='btn2'><a href="#" className="border-btn2 ">Browse All Sectors</a></button>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-    </div>
-</section>
+            </section>
 
-<style jsx>
-    {
-        `
+            <style jsx>
+                {
+                    `
             .red{
                 color:red;
             }
@@ -105,9 +105,9 @@ const Category = () => {
                 color:white;
             }
         `
-    }
-</style>
-</>  )
+                }
+            </style>
+        </>)
 }
 
 export default Category

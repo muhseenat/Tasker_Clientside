@@ -10,7 +10,7 @@ const profile = () => {
     const router=useRouter()
     const user =useSelector(state=>state.user.userData);
     const handleLogout=()=>{
-        localStorage.clear();
+        localStorage.remove("user");
         dispatch(setUserDetails(null))
         router.push('/')
       }
@@ -27,7 +27,7 @@ const profile = () => {
       <p className="about">Email : <br/>{user?.email}</p>
       <button className="msg-btn">Posted Jobs</button>
       <button className="follow-btn">Applied Jobs</button>
-      <Link href='/login'><a className='btn btn-success' onClick={handleLogout} style={{marginBottom:"10px"}} >Logout</a></Link>
+      <Link href='/login'><a className='btn msg-btn mt-1' onClick={handleLogout} style={{marginBottom:"05px"}} >Logout</a></Link>
      
     </div>
     <style jsx>
@@ -35,7 +35,7 @@ const profile = () => {
             `
             html,body{
                 font-family: Montserrat, sans-serif;
-                background: #28223f;
+               
               }
               .container{
                 user-select: none;
@@ -43,7 +43,7 @@ const profile = () => {
                 background: #231e39;
                 color: #b3b8cd;
                 border-radius: 5px;
-                width: 350px;
+                width: 600px;
                 text-align: center;
                 box-shadow: 0 10px 20px -10px rgba(0,0,0,.75);
               }
@@ -102,6 +102,10 @@ const profile = () => {
               .container i:hover{
                 color: #03bfbc;
               }
+              @media screen and (max-width: 500px) {
+               .container{
+                width: 350px;
+               }
             `
         }
     </style>
