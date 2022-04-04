@@ -9,9 +9,9 @@ function AppBar() {
 
   return (
     <>
-    <Navbar bg="light" style={{margin: "0"}}  text="white" expand="sm" sticky="top" >
+    <Navbar bg="light" style={{margin: "0",boxShadow:"0px 2px 5px #777"}}  text="white" expand="sm" sticky="top" >
     <Container>
-      <Navbar.Brand href="#">Tasker</Navbar.Brand>
+      <Navbar.Brand href="#"><img className="logo" src="./logo.png"/>TASKER</Navbar.Brand>
       <Navbar.Toggle aria-controls="navbarScroll" />
       <Navbar.Collapse id="navbarScroll">
         <Nav
@@ -19,8 +19,8 @@ function AppBar() {
           style={{ maxHeight: '100px' }}
           navbarScroll
         >
-          <Link href='/'><Nav.Link>Home</Nav.Link></Link>
-          <Link href='/jobs'><Nav.Link>Jobs</Nav.Link></Link>
+          <Link href='/'><a className='nav-link'>Home</a></Link>
+          <Link href='/jobs'><a className='nav-link'>Jobs</a></Link>
 
         
         </Nav>

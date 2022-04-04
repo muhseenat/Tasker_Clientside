@@ -1,5 +1,6 @@
 import { fontSize } from '@mui/system'
 import React from 'react'
+import Link from 'next/link'
 
 const ApplyJob = () => {
   return (
@@ -14,9 +15,9 @@ const ApplyJob = () => {
                 </div>
                 <div className='row'>
                     <div className='col-lg-5 m-auto'>
-                        <button className='btn2'>
+                        <Link href="/jobs"><button className='btn2'>
                             Apply Job
-                        </button>
+                        </button></Link>
                     </div>
                 </div>
             </div>
