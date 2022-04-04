@@ -5,16 +5,22 @@ import { useSelector } from 'react-redux';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 const Form = () => {
+
 const categories=['ELECTRICIAN','SOFTWARE ENGINEER','PLUMBER','GARDENER'];
 // const [categories,setCategories]=useState([])
 const user=useSelector(state=>state.user.userData)
+const router = useRouter();
+if(!user){
+  router.push('/login')
+ }
+
 useEffect(()=>{
+   
    axios.get('/admin/get/category').then((resp)=>{
      console.log(resp);
      setCategories(resp.data)
    }).catch(err=>console.log(err))
 },[])
-    const router = useRouter();
     let data={
          user_id:user?._id,
         job_designation:"",
@@ -53,6 +59,7 @@ const handlePost=async(e)=>{
   return (
       
 <div className='container '>
+<h3 className='text-center py-3'>POST JOB</h3>
 <form className='w-100' onSubmit={(e)=>handlePost(e)}>
   <div className="form-row ">
     <div className="form-group col-md-6 m-3">
@@ -84,19 +91,21 @@ const handlePost=async(e)=>{
       <label name="inputCity">Minimum Payment</label>
       <input type="text" className="form-control" id="inputCity" name="minimum_pay" onChange={(e)=>updateFormData(e)}/>
     </div>
+  
+    <div className="form-group col-md-6 m-3">
+      <label name="skills">Skills Required</label>
+      <input type="text" className="form-control"  name="skills" onChange={(e)=>updateFormData(e)}/>
+    </div>
     <div className="form-group col-md-4 m-3">
       <label name="inputState">Time Period From:</label>
       <input type="date" className="form-control" id="inputCity" name="from" onChange={(e)=>updateFormData(e)} />
       <label name="inputState">To:</label>
       <input type="date" className="form-control" id="inputCity" name="to" onChange={(e)=>updateFormData(e)} />
     </div>
-    <div className="form-group col-md-2 m-3">
-      <label name="inputZip">Skills Required</label>
-      <input type="text" className="form-control" id="inputZip" name="skills" onChange={(e)=>updateFormData(e)}/>
-    </div>
   </div>
-  
-  <button type="submit" className="btn btn-primary mt-3">Post Job</button>
+  <div className="text-right">
+  <button type="submit" className="btn btn-primary m-3 ">Post Job</button>
+  </div>
 </form>
 </div>
     )

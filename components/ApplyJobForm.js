@@ -1,16 +1,19 @@
 import { useRouter } from 'next/router';
-import React,{useState} from 'react';
+import React,{useState,useEffect} from 'react';
 import { useSelector } from 'react-redux';
 import axios from '../axios'
 
 
 const ApplyJobForm = () => {
-   const user_id = useSelector(state=>state.user?.userData?._id);
+   const user = useSelector(state=>state.user?.userData);
    const router = useRouter();
    const { id } = router.query
 
+    if(!user){
+      router.push('/login')
+    }
     const formData={
-        user_id,
+        user_id:user?._id,
         job_id:id,
         name:"",
         place:"",
