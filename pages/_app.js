@@ -5,15 +5,15 @@ import '../styles/globals.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { wrapper } from "../store"
 function MyApp({ Component, pageProps }) {
-const user=useSelector(state=>state.user.userData)
+  const user = useSelector(state => state.user.userData)
   return (
-  <>
-  <Head>
-    {user&&<AppBar/>}
-  </Head>
+    <>
+      <Head>
+        {user && <AppBar />}
+      </Head>
 
-  <Component {...pageProps} />
-  </>
+      <Component {...pageProps} />
+    </>
   )
 }
 

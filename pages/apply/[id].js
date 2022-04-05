@@ -4,12 +4,12 @@ import AppBar from '../../components/Nav'
 
 const applyJob = () => {
   return (
-<>
-<AppBar/>
-<ApplyJobForm/>
+    <>
+      <AppBar />
+      <ApplyJobForm />
 
 
-</>
+    </>
 
   )
 }

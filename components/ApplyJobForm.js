@@ -14,9 +14,6 @@ const ApplyJobForm = () => {
   const jobs = useSelector(state=>state.jobs?.jobData);
   console.log(jobs);
   const jobDetails= jobs.filter(job=>job._id==id)
-  console.log('hi mucccc');
-  console.log(jobDetails,"this is job details");
-  console.log(jobDetails[0].city,'this id city....');
   const formData = {
     user_id: user?._id,
     provider_id:jobDetails[0].user_id,

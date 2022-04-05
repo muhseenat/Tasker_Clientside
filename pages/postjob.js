@@ -4,10 +4,10 @@ import Form from '../components/Form';
 
 const postjob = () => {
   return (
-<>
-<AppBar/>
-<Form/>
-</>
+    <>
+      <AppBar />
+      <Form />
+    </>
 
   )
 

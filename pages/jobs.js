@@ -5,12 +5,12 @@ const jobs = () => {
   return (
 
 
- <>
- <AppBar/>
- <SingleJob/>
- 
- </>
-    )
+    <>
+      <AppBar />
+      <SingleJob />
+
+    </>
+  )
 }
 
 export default jobs

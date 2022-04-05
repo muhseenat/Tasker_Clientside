@@ -2,36 +2,36 @@ import React from 'react'
 import AppBar from '../components/Nav'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import { useSelector,useDispatch} from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import { setUserDetails } from '../store/actions/userActions';
 
 const profile = () => {
-    const dispatch =useDispatch();
-    const router=useRouter()
-    const user =useSelector(state=>state.user.userData);
-    const handleLogout=()=>{
-        localStorage.remove("user");
-        dispatch(setUserDetails(null))
-        router.push('/')
-      }
+  const dispatch = useDispatch();
+  const router = useRouter()
+  const user = useSelector(state => state.user.userData);
+  const handleLogout = () => {
+    localStorage.remove("user");
+    dispatch(setUserDetails(null))
+    router.push('/')
+  }
 
   return (
-      <>
-      <AppBar/>
+    <>
+      <AppBar />
       <body>
-    <div className="container">
-      <div className="cover-photo">
-        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSyHGvAsJP8rcCnvYDZvqvNfWcTUqRc2EDpvg&usqp=CAU" className="profile"/>
-      </div>
-      <div className="profile-name">{user?.name}</div>
-      <p className="about">Email : <br/>{user?.email}</p>
-      <Link href={`/postedJobs/${user._id}`}><button className="msg-btn">Posted Jobs</button></Link>
-      <Link href="/appliedJobs"><button className="follow-btn">Applied Jobs</button></Link>
-      <button className='btn msg-btn mt-1' onClick={handleLogout} style={{marginBottom:"05px"}} >Logout</button>
-     
-    </div>
-    <style jsx>
-        {
+        <div className="container">
+          <div className="cover-photo">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSyHGvAsJP8rcCnvYDZvqvNfWcTUqRc2EDpvg&usqp=CAU" className="profile" />
+          </div>
+          <div className="profile-name">{user?.name}</div>
+          <p className="about">Email : <br />{user?.email}</p>
+          <Link href={`/postedJobs/${user._id}`}><button className="msg-btn">Posted Jobs</button></Link>
+          <Link href="/appliedJobs"><button className="follow-btn">Applied Jobs</button></Link>
+          <button className='btn msg-btn mt-1' onClick={handleLogout} style={{ marginBottom: "05px" }} >Logout</button>
+
+        </div>
+        <style jsx>
+          {
             `
             html,body{
                 font-family: Montserrat, sans-serif;
@@ -107,9 +107,9 @@ const profile = () => {
                 width: 350px;
                }
             `
-        }
-    </style>
-    </body>
+          }
+        </style>
+      </body>
     </>
   )
 }

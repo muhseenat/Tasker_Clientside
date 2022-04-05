@@ -5,10 +5,9 @@ import SingleUserAppliedJobs from '../components/SingleUserAppliedJobs'
 const appliedJobs = () => {
   return (
     <>
-    <AppBar/>
-    <DataTable/>
-    {/* <SingleUserAppliedJobs/> */}
-    
+      <AppBar />
+      <DataTable />
+
     </>
   )
 }

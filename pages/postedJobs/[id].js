@@ -2,22 +2,33 @@ import React from 'react'
 import { useSelector } from 'react-redux'
 import AppBar from '../../components/Nav'
 import { useRouter } from 'next/router';
-
+import Link from 'next/link';
 
 const appliedJobs = () => {
 
-    const router = useRouter()
-    const allJob=useSelector(state=>state.jobs?.jobData)
-    // const userId=useSelector(state=>state.user?.userData._id)
-  const { id } = router.query
+  const router = useRouter()
+  const allJob = useSelector(state => state.jobs?.jobData)
+  
+  console.log(allJob,'these are jobs');
+  const userId=useSelector(state=>state.user?.userData._id)
+  console.log(userId,'id from redux');
+  const { id } = router.query;
+console.log(id,'useridddddddd');
 
-    const jobs=allJob.filter(job=>job.user_id==id)
+const jobss = useSelector(state=>state.jobs?.jobData);
+console.log(jobss,'this from reduxxxx')
+// const jobDetails= jobs.filter(job=>job._id==id)
+// const formData = {
+let jobs=[];
+  //  jobs = allJob?.filter(job => job.user_id == id)
+  // jobs= allJob.filter(job=>job._id==id)
+
   return (
-<>
+    <>
 
-<AppBar/>
+      <AppBar />
 
-<div className='container'>
+      <div className='container'>
 
         {jobs.map((job, index) => {
           return (
@@ -52,9 +63,9 @@ const appliedJobs = () => {
        `
         }
       </style>
-    
-</>
- 
+
+    </>
+
 
   )
 }
