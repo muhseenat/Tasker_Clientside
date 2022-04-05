@@ -1,10 +1,13 @@
 
-  
+  import dynamic from 'next/dynamic'
+
+const TableHeader = dynamic(() => import('./DataTable/Header'))
+const Pagination = dynamic(() => import('./DataTable/Pagination'))
+const Search = dynamic(() => import('./DataTable/Search'))
 import React, { useEffect, useState, useMemo } from "react";
-import { TableHeader, Pagination, Search } from "./DataTable";
+
 import useFullPageLoader from '../hook/useFullPageLoader'
-// import ExternalInfo from "components/ExternalInfo";
-// import AppConfig from "App.config";
+
 import axios from '../axios';
 
 
@@ -19,14 +22,14 @@ const DataTable = () => {
   const ITEMS_PER_PAGE = 3;
 
   const headers = [
-      { name: "No#", field: "_id", sortable: false },
+      { name: "No", field: "No", sortable: false },
       { name: "Name", field: "name", sortable: true },
       { name: "Email", field: "email", sortable: true },
       { name: "Resume", field: "qualification", sortable: false }
   ];
 
   useEffect(() => {
-    //axios
+
       const getData = () => {
           showLoader();
 
@@ -73,11 +76,8 @@ const DataTable = () => {
   }, [comments, currentPage, search, sorting]);
 
   return (
-      <>
-          {/* Navbarrrrr <Header title="Building a data table in react" /> */}
-          
-
-          {/* <ExternalInfo page="datatable" /> */}
+      <div className='container mt-5'>
+        
 
           <div className="row w-100">
               <div className="col mb-3 col-12 text-center">
@@ -110,12 +110,12 @@ const DataTable = () => {
                       <tbody>
                           {commentsData.map(comment => (
                               <tr>
-                                  <th scope="row" key={comment._id}>
-                                      {comment._id}
+                                  <th scope="row" key={comment.No}>
+                                      {comment.No}
                                   </th>
                                   <td>{comment.name}</td>
                                   <td>{comment.email}</td>
-                                  <td>{comment.qualification}</td>
+                                  <td>{comment.qualification},{comment.skill},{comment.experience}</td>
                               </tr>
                           ))}
                       </tbody>
@@ -123,7 +123,7 @@ const DataTable = () => {
               </div>
           </div>
           {loader}
-      </>
+      </div>
   );
 };
 

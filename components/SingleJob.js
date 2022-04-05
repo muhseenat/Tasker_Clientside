@@ -1,16 +1,18 @@
 import React, { useEffect, useState } from 'react'
+import { useDispatch,useSelector } from 'react-redux'
 import axios from '../axios'
 import Link from 'next/link'
+import { setJobDetails } from '../store/actions/jobAction'
 
 const SingleJob = () => {
-
-  const [jobs, setJobs] = useState([{}])
+  const dispatch = useDispatch();
+  const [jobs, setJobs] = useState([{}]);
 
   useEffect(() => {
     axios.get('/get/jobs').then((res) => {
-
-      console.log(res);
-      console.log('jobbbbb');
+     
+     dispatch(setJobDetails(res.data))
+     localStorage.setItem('jobs',JSON.stringify(res.data))
       setJobs(res.data)
       console.log(res.data);
     }).catch((err) => {
