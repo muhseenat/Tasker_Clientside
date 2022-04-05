@@ -7,7 +7,7 @@ const Search = dynamic(() => import('./DataTable/Search'))
 import React, { useEffect, useState, useMemo } from "react";
 
 import useFullPageLoader from '../hook/useFullPageLoader'
-
+import { useSelector } from 'react-redux';
 import axios from '../axios';
 
 
@@ -18,14 +18,15 @@ const DataTable = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [search, setSearch] = useState("");
   const [sorting, setSorting] = useState({ field: "", order: "" });
-
+  const user=useSelector(state=>state.user.userData)
+  const id=user._id
   const ITEMS_PER_PAGE = 3;
 
   const headers = [
-      { name: "No", field: "No", sortable: false },
-      { name: "Name", field: "name", sortable: true },
-      { name: "Email", field: "email", sortable: true },
-      { name: "Resume", field: "qualification", sortable: false }
+      { name: "Name", field: "name", sortable: true},
+      { name: "Payment", field: "pay", sortable: true },
+      { name: "Place", field: "place", sortable: true },
+      { name: "Status", field: "sstatus", sortable: false }
   ];
 
   useEffect(() => {
@@ -33,7 +34,7 @@ const DataTable = () => {
       const getData = () => {
           showLoader();
 
-          axios.get('/get/applied/jobs').then((resp)=>{
+          axios.get(`/user/applied/job/${id}`).then((resp)=>{
             hideLoader();
             console.log(resp?.data);
             setComments(resp?.data);
@@ -44,6 +45,8 @@ const DataTable = () => {
 
       getData();
   }, []);
+
+
   console.log(comments,'this is comments');
 //search function
   const commentsData = useMemo(() => {
@@ -52,8 +55,8 @@ const DataTable = () => {
       if (search) {
           computedComments = computedComments.filter(
               comment =>
-                  comment.name.toLowerCase().includes(search.toLowerCase()) ||
-                  comment.email.toLowerCase().includes(search.toLowerCase())
+              comment.applied_jobs[0].job_name.toLowerCase().includes(search.toLowerCase()) ||
+              comment.applied_jobs[0].city.toLowerCase().includes(search.toLowerCase())
           );
       }
 
@@ -77,7 +80,7 @@ const DataTable = () => {
 
   return (
       <div className='container mt-5'>
-        
+        <h3 className='text-center'>Applied Jobs</h3>
 
           <div className="row w-100">
               <div className="col mb-3 col-12 text-center">
@@ -110,12 +113,13 @@ const DataTable = () => {
                       <tbody>
                           {commentsData.map(comment => (
                               <tr>
-                                  <th scope="row" key={comment.No}>
-                                      {comment.No}
+                                  <th scope="row" key={comment.applied_jobs[0].job_id}>
+                                  {comment.applied_jobs[0].job_name}
                                   </th>
-                                  <td>{comment.name}</td>
-                                  <td>{comment.email}</td>
-                                  <td>{comment.qualification},{comment.skill},{comment.experience}</td>
+                                  <td>{comment.applied_jobs[0].pay}</td>
+                                  <td>{comment.applied_jobs[0].city}</td>
+                                  <td>{comment.applied_jobs[0].status}</td>
+
                               </tr>
                           ))}
                       </tbody>

@@ -11,11 +11,6 @@ import { useEffect } from "react"
 import {testData } from "../store/actions/userActions"
 
 const index = () => {
-const user=useSelector(state=>state.user.userData)
- const dispatch = useDispatch()
-useEffect(()=>{
- dispatch(testData("dracuuuu"))
-},[])
 
   return (
     <>

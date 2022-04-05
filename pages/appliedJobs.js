@@ -6,8 +6,8 @@ const appliedJobs = () => {
   return (
     <>
     <AppBar/>
-    {/* <DataTable/> */}
-    <SingleUserAppliedJobs/>
+    <DataTable/>
+    {/* <SingleUserAppliedJobs/> */}
     
     </>
   )

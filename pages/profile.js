@@ -25,9 +25,9 @@ const profile = () => {
       </div>
       <div className="profile-name">{user?.name}</div>
       <p className="about">Email : <br/>{user?.email}</p>
-      <button className="msg-btn">Posted Jobs</button>
-      <button className="follow-btn">Applied Jobs</button>
-      <Link href='/login'><a className='btn msg-btn mt-1' onClick={handleLogout} style={{marginBottom:"05px"}} >Logout</a></Link>
+      <Link href={`/postedJobs/${user._id}`}><button className="msg-btn">Posted Jobs</button></Link>
+      <Link href="/appliedJobs"><button className="follow-btn">Applied Jobs</button></Link>
+      <button className='btn msg-btn mt-1' onClick={handleLogout} style={{marginBottom:"05px"}} >Logout</button>
      
     </div>
     <style jsx>

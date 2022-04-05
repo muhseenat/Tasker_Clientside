@@ -7,21 +7,33 @@ import axios from '../axios'
 const ApplyJobForm = () => {
   const user = useSelector(state => state.user?.userData);
   const router = useRouter();
-  const { id } = router.query
-
   if (!user) {
     router.push('/login')
   }
+  const { id } = router.query
+  const jobs = useSelector(state=>state.jobs?.jobData);
+  console.log(jobs);
+  const jobDetails= jobs.filter(job=>job._id==id)
+  console.log('hi mucccc');
+  console.log(jobDetails,"this is job details");
+  console.log(jobDetails[0].city,'this id city....');
   const formData = {
     user_id: user?._id,
+    provider_id:jobDetails[0].user_id,
+    job_name:jobDetails[0].job_designation,
+    province:jobDetails[0].province,
+    city:jobDetails[0].city,
+    pay:jobDetails[0].minimum_pay,
+    expiry_date:jobDetails[0].to,
     job_id: id,
     name: "",
     place: "",
-    phone: "",
+    email: "",
     qualification: "",
     skill: "",
     experience: ""
   }
+  console.log(formData,'this is form data');
   const [data, setData] = useState(formData)
   const updateFormData = (e) => {
     const name = e.target.name;
@@ -52,7 +64,7 @@ const ApplyJobForm = () => {
             <input placeholder="Your Place" type="text" tabindex="2" name='place' onChange={(e) => updateFormData(e)} required />
           </fieldset>
           <fieldset>
-            <input placeholder="Your Phone Number (optional)" type="tel" name='phone' onChange={(e) => updateFormData(e)} tabindex="3" />
+            <input placeholder="Your Email" type="email" name='email' onChange={(e) => updateFormData(e)} tabindex="3" />
           </fieldset>
           <fieldset>
             <input placeholder="Your Qualification" type="text" name='qualification' onChange={(e) => updateFormData(e)} tabindex="4" />
