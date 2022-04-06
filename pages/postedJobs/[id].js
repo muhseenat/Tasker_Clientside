@@ -15,7 +15,8 @@ const appliedJobs = () => {
      alert("are you sure want to cancel")
      console.log('not workingg');
      axios.delete(`/cancel/job/${jobId}`).then((resp)=>{
-       //successbar
+      //success bar
+      router.push('/jobs');
      }).catch(err=>console.log(err))
    }
 
@@ -23,6 +24,7 @@ const appliedJobs = () => {
     <>
       <AppBar />
       <div className='container'>
+        <h2 className='text-center mt-2'>POSTED JOBS</h2>
         {jobs.map((job, index) => {
           return (
             <div className="card mb-4 mt-4" key={{ index }}>

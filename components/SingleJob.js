@@ -32,6 +32,7 @@ const SingleJob = () => {
               <img src="https://images.unsplash.com/photo-1507679799987-c73779587ccf?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTR8fGpvYiUyMHNlYXJjaHxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60" className="card-img-top" alt="card-image" />
               <div className="card-body">
                 <h5 className="card-title">{job.job_designation}({job.category})</h5>
+                <p className="card-text">{job.job_desc}</p>
 
                 <p className="card-text">Place:{job.province},{job.city}</p>
                 <p className="card-text">Minimum Payment : {job.minimum_pay}</p>

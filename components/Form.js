@@ -6,8 +6,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 const Form = () => {
 
-  const categories = ['ELECTRICIAN', 'SOFTWARE ENGINEER', 'PLUMBER', 'GARDENER'];
-  // const [categories,setCategories]=useState([])
+  // const categories = ['ELECTRICIAN', 'SOFTWARE ENGINEER', 'PLUMBER', 'GARDENER'];
+  const [categories,setCategories]=useState([])
   const user = useSelector(state => state.user.userData)
   const router = useRouter();
   // if (!user) {
@@ -31,7 +31,7 @@ const fromDate = yyyy+'-'+mm+'-'+dd;
 
     axios.get('/admin/get/category').then((resp) => {
       console.log(resp);
-      // setCategories(resp.data)
+      setCategories(resp?.data)
     }).catch(err => console.log(err))
   }, [])
   let data = {
@@ -86,7 +86,7 @@ const fromDate = yyyy+'-'+mm+'-'+dd;
           <div className="form-group col-md-6 m-3">
             <label name="inputPassword4">Category</label>
             <select id="inputState" name="category" onChange={(e) => updateFormData(e)} className="form-control">
-              {categories.map((category, index) => { return (<option key={index}>{category}</option>) })}
+              {categories.map((category, index) => { return (<option key={index}>{category.name}</option>) })}
 
             </select>
           </div>

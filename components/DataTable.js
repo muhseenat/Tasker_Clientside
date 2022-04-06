@@ -1,134 +1,131 @@
 
-  import dynamic from 'next/dynamic'
-
-const TableHeader = dynamic(() => import('./DataTable/Header'))
-const Pagination = dynamic(() => import('./DataTable/Pagination'))
-const Search = dynamic(() => import('./DataTable/Search'))
+import dynamic from 'next/dynamic'
 import React, { useEffect, useState, useMemo } from "react";
-
 import useFullPageLoader from '../hook/useFullPageLoader'
 import { useSelector } from 'react-redux';
 import axios from '../axios';
-
+const TableHeader = dynamic(() => import('./DataTable/Header'))
+const Pagination = dynamic(() => import('./DataTable/Pagination'))
+const Search = dynamic(() => import('./DataTable/Search'))
 
 const DataTable = () => {
-  const [comments, setComments] = useState([]);//data from applied user
-  const [loader, showLoader, hideLoader] = useFullPageLoader();
-  const [totalItems, setTotalItems] = useState(0);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [search, setSearch] = useState("");
-  const [sorting, setSorting] = useState({ field: "", order: "" });
-  const user=useSelector(state=>state.user.userData)
-  const id=user._id
-  const ITEMS_PER_PAGE = 3;
+    const [comments, setComments] = useState([]);
+    const [loader, showLoader, hideLoader] = useFullPageLoader();
+    const [totalItems, setTotalItems] = useState(0);
+    const [currentPage, setCurrentPage] = useState(1);
+    const [search, setSearch] = useState("");
+    const [sorting, setSorting] = useState({ field: "", order: "" });
+    const user = useSelector(state => state.user.userData)
+    const id = user._id
+    const ITEMS_PER_PAGE = 3;
 
-  const headers = [
-      { name: "Name", field: "name", sortable: true},
-      { name: "Payment", field: "pay", sortable: true },
-      { name: "Place", field: "place", sortable: true },
-      { name: "Status", field: "sstatus", sortable: false }
-  ];
+    const headers = [
+        { name: "Name", field: "name", sortable: true },
+        { name: "Payment", field: "pay", sortable: true },
+        { name: "Place", field: "place", sortable: true },
+        { name: "Status", field: "sstatus", sortable: false }
+    ];
 
-  useEffect(() => {
+    useEffect(() => {
 
-      const getData = () => {
-          showLoader();
+        const getData = () => {
+            showLoader();
 
-          axios.get(`/user/applied/job/${id}`).then((resp)=>{
-            hideLoader();
-            console.log(resp?.data);
-            setComments(resp?.data);
+            axios.get(`/user/applied/job/${id}`).then((resp) => {
+                hideLoader();
+                console.log(resp?.data);
+                setComments(resp?.data);
 
-          }).catch(err=>console.log(err))
-        
-      };
+            }).catch(err => console.log(err))
 
-      getData();
-  }, []);
+        };
+
+        getData();
+    }, []);
 
 
-  console.log(comments,'this is comments');
-//search function
-  const commentsData = useMemo(() => {
-      let computedComments = comments;
+    console.log(comments, 'this is comments');
+    //search function
+    const commentsData = useMemo(() => {
+        let computedComments = comments;
 
-      if (search) {
-          computedComments = computedComments.filter(
-              comment =>
-              comment.applied_jobs[0].job_name.toLowerCase().includes(search.toLowerCase()) ||
-              comment.applied_jobs[0].city.toLowerCase().includes(search.toLowerCase())
-          );
-      }
+        if (search) {
+            computedComments = computedComments.filter(
+                comment =>
+                    comment.applied_jobs[0].job_name.toLowerCase().includes(search.toLowerCase()) ||
+                    comment.applied_jobs[0].city.toLowerCase().includes(search.toLowerCase())
+            );
+        }
 
-      setTotalItems(computedComments.length);
+        setTotalItems(computedComments.length);
 
-      //Sorting comments
-      if (sorting.field) {
-          const reversed = sorting.order === "asc" ? 1 : -1;
-          computedComments = computedComments.sort(
-              (a, b) =>
-                  reversed * a[sorting.field].localeCompare(b[sorting.field])
-          );
-      }
+        //Sorting comments
+        if (sorting.field) {
+            const reversed = sorting.order === "asc" ? 1 : -1;
+            computedComments = computedComments.sort(
+                (a, b) =>
+                    reversed * a[sorting.field].localeCompare(b[sorting.field])
+            );
+        }
 
-      //Current Page slice
-      return computedComments.slice(
-          (currentPage - 1) * ITEMS_PER_PAGE,
-          (currentPage - 1) * ITEMS_PER_PAGE + ITEMS_PER_PAGE
-      );
-  }, [comments, currentPage, search, sorting]);
+        //Current Page slice
+        return computedComments.slice(
+            (currentPage - 1) * ITEMS_PER_PAGE,
+            (currentPage - 1) * ITEMS_PER_PAGE + ITEMS_PER_PAGE
+        );
+    }, [comments, currentPage, search, sorting]);
 
-  return (
-      <div className='container mt-5'>
-        <h3 className='text-center'>Applied Jobs</h3>
+    return (
+        <div className='container mt-5'>
+            <h3 className='text-center'>Applied Jobs</h3>
 
-          <div className="row w-100">
-              <div className="col mb-3 col-12 text-center">
-                  <div className="row">
-                      <div className="col-md-6">
-                          <Pagination
-                              total={totalItems}
-                              itemsPerPage={ITEMS_PER_PAGE}
-                              currentPage={currentPage}
-                              onPageChange={page => setCurrentPage(page)}
-                          />
-                      </div>
-                      <div className="col-md-6 d-flex flex-row-reverse">
-                          <Search
-                              onSearch={value => {
-                                  setSearch(value);
-                                  setCurrentPage(1);
-                              }}
-                          />
-                      </div>
-                  </div>
+            <div className="row w-100">
+                <div className="col mb-3 col-12 text-center">
+                    <div className="row">
+                        <div className="col-md-6">
+                            <Pagination
+                                total={totalItems}
+                                itemsPerPage={ITEMS_PER_PAGE}
+                                currentPage={currentPage}
+                                onPageChange={page => setCurrentPage(page)}
+                            />
+                        </div>
+                        <div className="col-md-6 d-flex flex-row-reverse">
+                            <Search
+                                onSearch={value => {
+                                    setSearch(value);
+                                    setCurrentPage(1);
+                                }}
+                            />
+                        </div>
+                    </div>
 
-                  <table className="table table-striped">
-                      <TableHeader
-                          headers={headers}
-                          onSorting={(field, order) =>
-                              setSorting({ field, order })
-                          }
-                      />
-                      <tbody>
-                          {commentsData.map(comment => (
-                              <tr>
-                                  <th scope="row" key={comment.applied_jobs[0].job_id}>
-                                  {comment.applied_jobs[0].job_name}
-                                  </th>
-                                  <td>{comment.applied_jobs[0].pay}</td>
-                                  <td>{comment.applied_jobs[0].city}</td>
-                                  <td>{comment.applied_jobs[0].status}</td>
+                    <table className="table table-striped">
+                        <TableHeader
+                            headers={headers}
+                            onSorting={(field, order) =>
+                                setSorting({ field, order })
+                            }
+                        />
+                        <tbody>
+                            {commentsData.map(comment => (
+                                <tr>
+                                    <th scope="row" key={comment.applied_jobs[0].job_id}>
+                                        {comment.applied_jobs[0].job_name}
+                                    </th>
+                                    <td>{comment.applied_jobs[0].pay}</td>
+                                    <td>{comment.applied_jobs[0].city}</td>
+                                    <td>{comment.applied_jobs[0].status}</td>
 
-                              </tr>
-                          ))}
-                      </tbody>
-                  </table>
-              </div>
-          </div>
-          {loader}
-      </div>
-  );
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            {loader}
+        </div>
+    );
 };
 
 export default DataTable;
