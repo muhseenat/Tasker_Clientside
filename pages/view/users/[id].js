@@ -24,9 +24,10 @@ const postedJobUsers = () => {
 
     const headers = [
         { name: "Name", field: "name", sortable: true},
-        { name: "Payment", field: "pay", sortable: true },
+        { name: "Email", field: "pay", sortable: true },
         { name: "Place", field: "place", sortable: true },
-        { name: "Status", field: "sstatus", sortable: false }
+        { name: "Details", field: "details", sortable: false },
+        { name: "Status", field: "status", sortable: false }
     ];
 
     useEffect(() => {
@@ -34,7 +35,7 @@ const postedJobUsers = () => {
         const getData = () => {
             showLoader();
   
-            axios.get(`/user/applied/job/${id}`).then((resp)=>{
+            axios.get(`job/applied/user/${id}`).then((resp)=>{
               hideLoader();
               console.log(resp?.data);
               setComments(resp?.data);
@@ -114,13 +115,14 @@ const postedJobUsers = () => {
                       <tbody>
                           {commentsData.map(comment => (
                               <tr>
-                                  <th scope="row" key={comment.applied_jobs[0].job_id}>
-                                  {comment.applied_jobs[0].job_name}
+                                  <th scope="row" key={comment?.No}>
+                                  {comment?.name}
                                   </th>
-                                  <td>{comment.applied_jobs[0].pay}</td>
-                                  <td>{comment.applied_jobs[0].city}</td>
-                                  <td>{comment.applied_jobs[0].status}</td>
-
+                                  <td>{comment?.email}</td>
+                                  <td>{comment?.place}</td>
+                                  <td>{comment?.qualification},{comment?.skill},{comment?.experience}</td>
+                                  <td>{comment?.status}</td>
+                                  
                               </tr>
                           ))}
                       </tbody>

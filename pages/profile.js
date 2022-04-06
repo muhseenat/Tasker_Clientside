@@ -10,7 +10,8 @@ const profile = () => {
   const router = useRouter()
   const user = useSelector(state => state.user.userData);
   const handleLogout = () => {
-    localStorage.remove("user");
+    localStorage.removeItem("user");
+    localStorage.removeItem("jobs");
     dispatch(setUserDetails(null))
     router.push('/')
   }
@@ -25,7 +26,7 @@ const profile = () => {
           </div>
           <div className="profile-name">{user?.name}</div>
           <p className="about">Email : <br />{user?.email}</p>
-          <Link href={`/postedJobs/${user._id}`}><button className="msg-btn">Posted Jobs</button></Link>
+          <Link href={`/postedJobs/${user?._id}`}><button className="msg-btn">Posted Jobs</button></Link>
           <Link href="/appliedJobs"><button className="follow-btn">Applied Jobs</button></Link>
           <button className='btn msg-btn mt-1' onClick={handleLogout} style={{ marginBottom: "05px" }} >Logout</button>
 
