@@ -8,28 +8,13 @@ const appliedJobs = () => {
 
   const router = useRouter()
   const allJob = useSelector(state => state.jobs?.jobData)
-  
-  console.log(allJob,'these are jobs');
-  const userId=useSelector(state=>state.user?.userData._id)
-  console.log(userId,'id from redux');
   const { id } = router.query;
-console.log(id,'useridddddddd');
-
-const jobss = useSelector(state=>state.jobs?.jobData);
-console.log(jobss,'this from reduxxxx')
-// const jobDetails= jobs.filter(job=>job._id==id)
-// const formData = {
-let jobs=[];
-  //  jobs = allJob?.filter(job => job.user_id == id)
-  // jobs= allJob.filter(job=>job._id==id)
+   const jobs = allJob?.filter(job => job.user_id == id)||[]
 
   return (
     <>
-
       <AppBar />
-
       <div className='container'>
-
         {jobs.map((job, index) => {
           return (
             <div className="card mb-4 mt-4" key={{ index }}>
@@ -42,7 +27,7 @@ let jobs=[];
 
                 <p className="card-text">Skills Required:{job.skills}</p>
                 <p className="card-text"><small className="text-muted">{new Date(job.from).toDateString()}-{new Date(job.to).toDateString()}</small></p>
-                <Link href={`/apply/${job._id}`}  ><button className='btn btn-primary'>APPLY</button></Link>
+                <Link href={`/view/users/${job._id}`}  ><button className='btn btn-primary'>View</button></Link>
 
               </div>
             </div>
