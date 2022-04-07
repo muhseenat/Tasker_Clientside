@@ -9,29 +9,14 @@ import { Snackbar, Stack, Button, MuiAlert } from '@mui/material';
 import axios from '../axios';
 import { useDispatch, useSelector } from 'react-redux';
 import { setUserDetails } from '../store/actions/userActions'
-
+import { ToastContainer, toast } from 'react-toastify';
 
 
 
 
 const login = () => {
 
-  // const [open, setOpen] = useState(false);
-
-  // const Alert = React.forwardRef(function Alert(props, ref) {
-  //     return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
-  //   });
-  // const handleClick = () => {
-  //   setOpen(true);
-  // };
-
-  // const handleClose = (event, reason) => {
-  //   if (reason === 'clickaway') {
-  //     return;
-  //   }
-
-  //   setOpen(false);
-  // };
+  ;
 
 
   const dispatch = useDispatch()
@@ -64,6 +49,15 @@ const login = () => {
         dispatch(setUserDetails(res.data))
 
         localStorage.setItem("user", JSON.stringify(res.data))
+        toast.success('Login Succesfull', {
+          position: "top-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          });
         router.push({
           pathname: '/',
           query: { returnUrl: router.asPath }
@@ -73,6 +67,15 @@ const login = () => {
       console.log(error.response)
       console.log(error);
       setLoginError(error.response?.data?.err)
+      toast.error('Email or Password invalid', {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        });
       // handleClick()
 
     }
@@ -81,20 +84,10 @@ const login = () => {
   return (
     <>
 
-      {/* {loginError&&<Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
-  <Alert onClose={handleClose} severity="error" sx={{ width: '100%' }}>
-    This is a success message!
-  </Alert>
-</Snackbar>} */}
-      {/* 
-<Stack spacing={2} sx={{ width: '100%' }}>
-      <Button variant="outlined" onClick={handleClick}>
-        Open success snackbar
-      </Button> */}
 
 
       <div>
-
+      <ToastContainer />
         <h3 className={loginStyles.heading}>Login </h3>
 
         <div className={loginStyles.app}>
@@ -114,7 +107,7 @@ const login = () => {
               <div className="invalid-feedback">{errors.password?.message}</div>
             </div>
             <div className="form-group">
-              {loginError && <p className={loginStyles.error}>{loginError}</p>}
+              {/* {loginError && <p className={loginStyles.error}>{loginError}</p>} */}
 
               <div className='button'><button className={loginStyles.button} type="submit">Login</button></div>
               <p className={loginStyles.para}>Don't have an account?

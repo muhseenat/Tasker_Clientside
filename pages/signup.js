@@ -7,6 +7,7 @@ import * as Yup from 'yup';
 import loginStyles from '../styles/Login.module.css';
 import axios from '../axios'
 import { useDispatch, useSelector } from 'react-redux';
+import { ToastContainer, toast } from 'react-toastify';
 import { setUserDetails } from '../store/actions/userActions'
 
 const signup = () => {
@@ -45,21 +46,41 @@ const signup = () => {
 			if (res) {
 				dispatch(setUserDetails(res.data))
 				localStorage.setItem("user", JSON.stringify(res.data))
-
-				router.push({
-					pathname: '/',
-					query: { returnUrl: router.asPath }
-				})
+				toast.success('Login Succesfull', {
+					position: "top-center",
+					autoClose: 5000,
+					hideProgressBar: false,
+					closeOnClick: true,
+					pauseOnHover: true,
+					draggable: true,
+					progress: undefined,
+					});
+				// router.push({
+				// 	pathname: '/',
+				// 	query: { returnUrl: router.asPath }
+				// })
 			}
 		} catch (error) {
-			setSignupError(error.response?.data?.err)
+			setSignupError(error.response?.data?.err) 
+			 toast.error('This email or number is already taken', {
+				position: "top-center",
+				autoClose: 5000,
+				hideProgressBar: false,
+				closeOnClick: true,
+				pauseOnHover: true,
+				draggable: true,
+				progress: undefined,
+				});
 		}
 	}
 
 
 	return (
 		<div>
+      <ToastContainer />
+			
 			<h3 className={loginStyles.heading}>Signup Form </h3>
+
 			<div className={loginStyles.app}>
 				<div className={loginStyles.bg}></div>
 				<form className={loginStyles.loginform} onSubmit={handleSubmit(onSubmit)}>
@@ -90,7 +111,7 @@ const signup = () => {
 							<div className="invalid-feedback">{errors.confirmPassword?.message}</div>
 						</div>
 					</div>
-					{signupError && <p className={loginStyles.error}>{signupError}</p>}
+					{/* {signupError && <p className={loginStyles.error}>{signupError}</p>} */}
 					<div className='button'><button className={loginStyles.button} type="submit">Signup</button></div>
 					<p className={loginStyles.para}> Already have an account?
 						<Link href="/login"><a className={loginStyles.a} >Login</a></Link></p>
