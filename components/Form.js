@@ -3,29 +3,39 @@ import axios from '../axios';
 import { useRouter } from 'next/router';
 import { useSelector } from 'react-redux';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { ToastContainer, toast } from 'react-toastify';
+
 
 const Form = () => {
 
-  // const categories = ['ELECTRICIAN', 'SOFTWARE ENGINEER', 'PLUMBER', 'GARDENER'];
-  const [categories,setCategories]=useState([])
+  const [categories, setCategories] = useState([])
   const user = useSelector(state => state.user.userData)
   const router = useRouter();
   // if (!user) {
   //   router.push('/login')
   // }
+  const notify = () => toast.success('Successfully Posted', {
+    position: "top-center",
+    autoClose: 5000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+  });
 
-var today = new Date();
-var dd = today.getDate();
-var mm = today.getMonth()+1; 
-var yyyy = today.getFullYear();
-if(dd<10){
-  dd='0'+dd
-} 
-if(mm<10){
-  mm='0'+mm
-} 
+  var today = new Date();
+  var dd = today.getDate();
+  var mm = today.getMonth() + 1;
+  var yyyy = today.getFullYear();
+  if (dd < 10) {
+    dd = '0' + dd
+  }
+  if (mm < 10) {
+    mm = '0' + mm
+  }
 
-const fromDate = yyyy+'-'+mm+'-'+dd;
+  const fromDate = yyyy + '-' + mm + '-' + dd;
 
   useEffect(() => {
 
@@ -61,6 +71,8 @@ const fromDate = yyyy+'-'+mm+'-'+dd;
     try {
       const res = await axios.post('/create/job', formData)
       if (res) {
+        setFormData(data);
+        notify()
         router.push('/')
       }
     } catch (error) {
@@ -73,11 +85,22 @@ const fromDate = yyyy+'-'+mm+'-'+dd;
 
     <div className='container '>
       <h3 className='text-center py-3'>POST JOB</h3>
+      <ToastContainer
+        position="top-center"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
       <form className='w-100' onSubmit={(e) => handlePost(e)}>
         <div className="form-row ">
           <div className="form-group col-md-6 m-3">
             <label name="inputEmail4">Job Designation</label>
-            <input type="text" className="form-control" name="job_designation" onChange={(e) => updateFormData(e)} required/>
+            <input type="text" className="form-control" name="job_designation" onChange={(e) => updateFormData(e)} required />
           </div>
           <div className="form-group col-md-6 m-3">
             <label name="inputEmail4">Job Description</label>
@@ -93,7 +116,7 @@ const fromDate = yyyy+'-'+mm+'-'+dd;
         </div>
         <div className="form-group col-md-6 m-3">
           <label name="inputAddress">Province</label>
-          <input type="text" className="form-control" id="inputAddress" name="province" onChange={(e) => updateFormData(e)} required/>
+          <input type="text" className="form-control" id="inputAddress" name="province" onChange={(e) => updateFormData(e)} required />
         </div>
         <div className="form-group col-md-6 m-3">
           <label name="inputAddress2">City</label>
@@ -102,7 +125,7 @@ const fromDate = yyyy+'-'+mm+'-'+dd;
         <div className="form-row ">
           <div className="form-group col-md-6 m-3">
             <label name="inputCity">Minimum Payment</label>
-            <input type="text" className="form-control" id="inputCity" name="minimum_pay" onChange={(e) => updateFormData(e)} required/>
+            <input type="text" className="form-control" id="inputCity" name="minimum_pay" onChange={(e) => updateFormData(e)} required />
           </div>
 
           <div className="form-group col-md-6 m-3">
@@ -113,7 +136,7 @@ const fromDate = yyyy+'-'+mm+'-'+dd;
             <label name="inputState">Time Period From:</label>
             <input type="date" min={fromDate} className="form-control" id="inputCity" name="from" onChange={(e) => updateFormData(e)} required />
             <label name="inputState">To:</label>
-            <input type="date"  min={fromDate} className="form-control" id="inputCity" name="to" onChange={(e) => updateFormData(e)} required />
+            <input type="date" min={fromDate} className="form-control" id="inputCity" name="to" onChange={(e) => updateFormData(e)} required />
           </div>
         </div>
         <div className="text-right">

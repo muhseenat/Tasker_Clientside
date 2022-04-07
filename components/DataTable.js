@@ -34,7 +34,8 @@ const DataTable = () => {
             axios.get(`/user/applied/job/${id}`).then((resp) => {
                 hideLoader();
                 console.log(resp?.data);
-                setComments(resp?.data);
+                console.log(resp?.data[0]?.applied_jobs);
+                setComments(resp?.data[0]?.applied_jobs);
 
             }).catch(err => console.log(err))
 
@@ -52,8 +53,8 @@ const DataTable = () => {
         if (search) {
             computedComments = computedComments.filter(
                 comment =>
-                    comment.applied_jobs[0].job_name.toLowerCase().includes(search.toLowerCase()) ||
-                    comment.applied_jobs[0].city.toLowerCase().includes(search.toLowerCase())
+                    comment.job_name.toLowerCase().includes(search.toLowerCase()) ||
+                    comment.city.toLowerCase().includes(search.toLowerCase())
             );
         }
 
@@ -110,12 +111,12 @@ const DataTable = () => {
                         <tbody>
                             {commentsData.map(comment => (
                                 <tr>
-                                    <th scope="row" key={comment.applied_jobs[0].job_id}>
-                                        {comment.applied_jobs[0].job_name}
+                                    <th scope="row" key={comment.job_id}>
+                                        {comment.job_name}
                                     </th>
-                                    <td>{comment.applied_jobs[0].pay}</td>
-                                    <td>{comment.applied_jobs[0].city}</td>
-                                    <td>{comment.applied_jobs[0].status}</td>
+                                    <td>{comment.pay}</td>
+                                    <td>{comment.city}</td>
+                                    <td>{comment.status}</td>
 
                                 </tr>
                             ))}

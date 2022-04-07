@@ -2,7 +2,7 @@ import { useRouter } from 'next/router';
 import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import axios from '../axios'
-
+import { ToastContainer, toast } from 'react-toastify';
 
 const ApplyJobForm = () => {
   const user = useSelector(state => state.user?.userData);
@@ -43,7 +43,18 @@ const ApplyJobForm = () => {
 
     console.log(data, 'this is gong data');
     axios.post('/apply/job', data).then((res) => {
-      router.push('/jobs');
+      toast.success('Apply Successfully', {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        });
+      // router.push('/jobs');
+      setData(formData)
+
     }).catch(err => console.log(err))
   }
 
@@ -52,6 +63,7 @@ const ApplyJobForm = () => {
     <div>
 
       <div className="container">
+      <ToastContainer />
         <form id="contact" action="" method="post" onSubmit={handleSubmit}>
           <h3>Apply Form</h3>
           <fieldset>
