@@ -1,10 +1,10 @@
 import React from 'react'
 
-const Message = () => {
+const Message = ({ message, own }) => {
   return (
 
     <div 
-    // className={own ? "message own" : "message"}
+    className={own ? "message own" : "message"}
     >
     <div className="messageTop">
       <img

@@ -1,4 +1,5 @@
 import React from 'react'
+import ChatOnline from './ChatOnline'
 import Conversation from './Conversation'
 import Message from './Message'
 
@@ -23,7 +24,8 @@ const Chat = () => {
             {/* {currentChat ? ( */}
               <>
                 <div className="chatBoxTop">
-                <Message/>
+                <Message own={true}/>
+                <Message />
                   {/* {messages.map((m) => (
                     <div ref={scrollRef}>
                       <Message message={m} own={m.sender === user._id} />
@@ -53,6 +55,7 @@ const Chat = () => {
         </div>
         <div className="chatOnline">
           <div className="chatOnlineWrapper">
+            <ChatOnline/>
             {/* <ChatOnline
               onlineUsers={onlineUsers}
               currentId={user._id}
