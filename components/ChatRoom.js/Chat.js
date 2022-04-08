@@ -1,9 +1,22 @@
-import React from 'react'
+import React,{useState,useEffect} from 'react'
 import ChatOnline from './ChatOnline'
 import Conversation from './Conversation'
 import Message from './Message'
+import {useSelector} from 'react-redux'
+import axios from '../../axios'
 
 const Chat = () => {
+const [conversations,setConversations] = useState([])
+
+  const user = useSelector(state=>state.user.userData)
+ console.log(user._id);
+  useEffect(()=>{
+    axios.get('/conversation/'+user._id).then((resp)=>{
+      console.log(resp.data);
+      setConversations(resp?.data);
+    }).catch(err=>console.log(err))
+  },[])
+
   return (
       <>
       
@@ -11,7 +24,10 @@ const Chat = () => {
         <div className="chatMenu">
           <div className="chatMenuWrapper">
             <input placeholder="Search for friends" className="chatMenuInput" />
-            <Conversation/>
+           {conversations.map((c)=>(
+             <Conversation conversation={c} currentUser={user} />
+           ))}
+           
             {/* {conversations.map((c) => (
               <div onClick={() => setCurrentChat(c)}>
                 <Conversation conversation={c} currentUser={user} />

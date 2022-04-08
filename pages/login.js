@@ -76,7 +76,6 @@ const login = () => {
         draggable: true,
         progress: undefined,
         });
-      // handleClick()
 
     }
   }

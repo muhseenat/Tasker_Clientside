@@ -1,11 +1,23 @@
-import React from 'react'
+import React, { useEffect,useState } from 'react'
+import axios from '../../axios';
+const Conversation = ({conversation,currentUser}) => {
 
-const Conversation = () => {
+const [user,setUser] = useState(null)
+useEffect(()=>{
+  const friendId=conversation?.members.find((m)=>m!==currentUser._id)
+  console.log(friendId,'this id friend id');
+  axios.get('/users?userId='+friendId).then((resp)=>{
+    console.log(resp.data,'this is datatatatatatatta');
+    setUser(resp.data)
+  }).catch(err=>console.log(err))
+
+},[currentUser,conversation])
+
   return (
     <div className="conversation">
       <img
         className="conversationImg"
-        src='https://wonderfulengineering.com/wp-content/uploads/2014/10/wallpaper-photos-31.jpg'
+        src='https://thumbs.dreamstime.com/b/default-avatar-profile-image-vector-social-media-user-icon-potrait-182347582.jpg'
         // src={
         //   user?.profilePicture
         //     ? PF + user.profilePicture
@@ -13,8 +25,8 @@ const Conversation = () => {
         // }
         // alt=""
       />
-      <span className="conversationName">MUCCc
-        {/* {user?.username} */}
+      <span className="conversationName">
+        {user?.name}
         </span>
     </div>
   )
