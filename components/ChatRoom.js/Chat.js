@@ -9,9 +9,11 @@ const Chat = () => {
 const [conversations,setConversations] = useState([])
 const [currentChat,setCurrentChat] = useState(null)
 const [messages,setMessages] = useState([])
+const [newMessage,setNewMessage] = useState("")
 
   const user = useSelector(state=>state.user.userData)
  console.log(user._id);
+ //USEEFFECT TO FETCH CONVERSATION DEATILS
   useEffect(()=>{
     axios.get('/conversation/'+user._id).then((resp)=>{
       console.log(resp.data);
@@ -19,6 +21,7 @@ const [messages,setMessages] = useState([])
     }).catch(err=>console.log(err))
   },[user._id])
 
+  //USEEFFECT TO FETCH MESSAGES OF CURRENT USER
   useEffect(()=>{
     axios.get('/messages/'+currentChat?._id).then((res)=>{
   console.log(res,'thi is resssss');
@@ -28,6 +31,21 @@ const [messages,setMessages] = useState([])
 
   console.log(messages,'this is messages');
   console.log(currentChat,'ithann current chat');
+//NEW MESSAGES CREATING FUNCTION
+  const handleSubmit=(e)=>{
+   e.preventDefault();
+    const message={
+   sender:user._id,
+   text:newMessage,
+   conversationId:currentChat._id,
+    }
+    axios.post('/messages',message).then((res)=>{
+      setMessages([...messages,res.data])
+      setNewMessage("");
+    }).catch((err)=>{
+      console.log(err);
+    })
+  }
   return (
       <>
       
@@ -49,7 +67,7 @@ const [messages,setMessages] = useState([])
               <>
                 <div className="chatBoxTop">
               
-                  {messages.map((m) => (
+                  {messages?.map((m) => (
                     <div 
                     // ref={scrollRef}
                     >
@@ -63,11 +81,11 @@ const [messages,setMessages] = useState([])
                   <textarea
                     className="chatMessageInput"
                     placeholder="write something..."
-                    // onChange={(e) => setNewMessage(e.target.value)}
-                    // value={newMessage}
+                    onChange={(e) => setNewMessage(e.target.value)}
+                    value={newMessage}
                   ></textarea>
                   <button className="chatSubmitButton"
-                //    onClick={handleSubmit}
+                   onClick={handleSubmit}
                    >
                     Send
                   </button>
