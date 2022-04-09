@@ -1,4 +1,5 @@
 import React from 'react'
+import {format} from 'timeago.js'
 
 const Message = ({ message, own }) => {
   return (
@@ -17,7 +18,7 @@ const Message = ({ message, own }) => {
           </p>
     </div>
     <div className="messageBottom">
-        {message.createdAt}
+        {format(message.createdAt)}
         </div>
   </div>
   )
