@@ -7,6 +7,8 @@ import axios from '../../axios'
 
 const Chat = () => {
 const [conversations,setConversations] = useState([])
+const [currentChat,setCurrentChat] = useState(null)
+const [messages,setMessages] = useState([])
 
   const user = useSelector(state=>state.user.userData)
  console.log(user._id);
@@ -15,8 +17,17 @@ const [conversations,setConversations] = useState([])
       console.log(resp.data);
       setConversations(resp?.data);
     }).catch(err=>console.log(err))
-  },[])
+  },[user._id])
 
+  useEffect(()=>{
+    axios.get('/messages/'+currentChat?._id).then((res)=>{
+  console.log(res,'thi is resssss');
+      setMessages(res.data)
+    }).catch(err=>console.log(err))
+  },[currentChat])
+
+  console.log(messages,'this is messages');
+  console.log(currentChat,'ithann current chat');
   return (
       <>
       
@@ -24,29 +35,29 @@ const [conversations,setConversations] = useState([])
         <div className="chatMenu">
           <div className="chatMenuWrapper">
             <input placeholder="Search for friends" className="chatMenuInput" />
-           {conversations.map((c)=>(
-             <Conversation conversation={c} currentUser={user} />
-           ))}
-           
-            {/* {conversations.map((c) => (
+        
+            {conversations.map((c) => (
               <div onClick={() => setCurrentChat(c)}>
                 <Conversation conversation={c} currentUser={user} />
               </div>
-            ))} */}
+            ))}
           </div>
         </div>
         <div className="chatBox">
           <div className="chatBoxWrapper">
-            {/* {currentChat ? ( */}
+            {currentChat ? (
               <>
                 <div className="chatBoxTop">
-                <Message own={true}/>
-                <Message />
-                  {/* {messages.map((m) => (
-                    <div ref={scrollRef}>
-                      <Message message={m} own={m.sender === user._id} />
+              
+                  {messages.map((m) => (
+                    <div 
+                    // ref={scrollRef}
+                    >
+                      <Message message={m} 
+                      own={m.sender === user._id}
+                       />
                     </div>
-                  ))} */}
+                  ))}
                 </div>
                 <div className="chatBoxBottom">
                   <textarea
@@ -62,11 +73,11 @@ const [conversations,setConversations] = useState([])
                   </button>
                 </div>
               </>
-            {/* ) : ( */}
+            ) : (
               <span className="noConversationText">
                 Open a conversation to start a chat.
               </span>
-            {/* )} */}
+            )}
           </div>
         </div>
         <div className="chatOnline">
