@@ -4,43 +4,49 @@ import Conversation from './Conversation'
 import Message from './Message'
 import { useSelector } from 'react-redux'
 import axios from '../../axios'
-import {io } from 'socket.io-client'
+import { io } from 'socket.io-client'
 const Chat = () => {
   const [conversations, setConversations] = useState([])
   const [currentChat, setCurrentChat] = useState(null)
   const [messages, setMessages] = useState([])
   const [newMessage, setNewMessage] = useState("")
   const [arrivalMessage, setArrivalMessage] = useState(null);
+  const [onlineUsers, setOnlineUsers] = useState([])
   const socket = useRef()
   const scrollRef = useRef();
   const user = useSelector(state => state.user.userData)
   console.log(user._id);
 
 
-//USEEFFECT TO CONNECT TO WS & GET MESSAGES
-useEffect(() => {
-  socket.current = io("ws://localhost:8900");
-  socket.current.on("getMessage", (data) => {
-    setArrivalMessage({
-      sender: data.senderId,
-      text: data.text,
-      createdAt: Date.now(),
+  //USEEFFECT TO CONNECT TO WS & GET MESSAGES
+  useEffect(() => {
+    socket.current = io("ws://localhost:8900");
+    socket.current.on("getMessage", (data) => {
+      setArrivalMessage({
+        sender: data.senderId,
+        text: data.text,
+        createdAt: Date.now(),
+      });
     });
-  });
-}, []);
-//USEEFFECT FOR PRIVATE MESSAGES
-useEffect(() => {
-  arrivalMessage &&
-    currentChat?.members.includes(arrivalMessage.sender) &&
-    setMessages((prev) => [...prev, arrivalMessage]);
-}, [arrivalMessage, currentChat]);
-//USEEFFET TO CONNECT GET  ONLINE USERS
-useEffect(()=>{
-  socket.current.emit('addUser',user._id);
-  socket.current.on('getUsers',users=>{
-    console.log(users,'this is usersss');
-  })
-},[user])
+  },[]);
+
+
+  //USEEFFECT FOR PRIVATE MESSAGES
+  useEffect(() => {
+    arrivalMessage &&
+      currentChat?.members.includes(arrivalMessage.sender) &&
+      setMessages((prev) => [...prev, arrivalMessage]);
+  }, [arrivalMessage, currentChat]);
+
+
+  //USEEFFET TO CONNECT GET  ONLINE USERS
+  useEffect(() => {
+    socket.current.emit('addUser', user._id);
+    socket.current.on('getUsers', users => {
+      setOnlineUsers(users)
+      // setOnlineUsers(users)
+    })
+  }, [user])
 
 
 
@@ -59,17 +65,15 @@ useEffect(()=>{
     }).catch(err => console.log(err))
   }, [currentChat])
 
-//private chat 
-  const receiverId = currentChat?.members.find(
-    (member) => member !== user._id
-  );
-  
+  //private chat 
+  const receiverId = currentChat?.members.find(member => member !== user._id);
+
   socket.current?.emit("sendMessage", {
     senderId: user._id,
     receiverId,
     text: newMessage,
   });
-  
+
 
   //NEW MESSAGES CREATING FUNCTION
   const handleSubmit = (e) => {
@@ -88,9 +92,9 @@ useEffect(()=>{
   }
 
   //USE EFFECT FOR SMOOTH SCROLLING
-  useEffect(()=>{
-    scrollRef.current?.scrollIntoView({behaviour:'smooth'});
-  },[messages])
+  useEffect(() => {
+    scrollRef.current?.scrollIntoView({ behaviour: 'smooth' });
+  }, [messages])
   return (
     <>
 
@@ -99,7 +103,7 @@ useEffect(()=>{
           <div className="chatMenuWrapper">
             <input placeholder="Search for friends" className="chatMenuInput" />
 
-            {conversations.map((c,index) => (
+            {conversations.map((c, index) => (
               <div onClick={() => setCurrentChat(c)} key={index}>
                 <Conversation conversation={c} currentUser={user} />
               </div>
@@ -143,16 +147,15 @@ useEffect(()=>{
             )}
           </div>
         </div>
-        <div className="chatOnline">
+        {/* <div className="chatOnline">
           <div className="chatOnlineWrapper">
-            <ChatOnline />
-            {/* <ChatOnline
+            <ChatOnline
               onlineUsers={onlineUsers}
               currentId={user._id}
               setCurrentChat={setCurrentChat}
-            /> */}
+            />
           </div>
-        </div>
+        </div> */}
       </div>
 
 

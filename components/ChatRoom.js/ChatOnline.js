@@ -1,6 +1,10 @@
-import React from 'react'
+import React,{useState,useEffect} from 'react'
+import axios from '../../axios'
+const ChatOnline = ({onlineUsers,currentId,setCurrentChat}) => {
+  const [friends, setFriends] = useState([]);
+  const [onlineFriends, setOnlineFriends] = useState([]);
 
-const ChatOnline = () => {
+
   return (
     <div className="chatOnline">
       {/* {onlineFriends.map((o) => ( */}
