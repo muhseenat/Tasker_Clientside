@@ -10,19 +10,31 @@ const Chat = () => {
   const [currentChat, setCurrentChat] = useState(null)
   const [messages, setMessages] = useState([])
   const [newMessage, setNewMessage] = useState("")
+  const [arrivalMessage, setArrivalMessage] = useState(null);
   const socket = useRef()
   const scrollRef = useRef();
   const user = useSelector(state => state.user.userData)
   console.log(user._id);
 
 
-//USEEFFECT TO CONECT TO WS
-useEffect(()=>{
-  socket.current= io('ws://localhost:8900');
-},[])
-
-
-//USEEFET TO CONNECT GET  ONLINE USERS
+//USEEFFECT TO CONNECT TO WS & GET MESSAGES
+useEffect(() => {
+  socket.current = io("ws://localhost:8900");
+  socket.current.on("getMessage", (data) => {
+    setArrivalMessage({
+      sender: data.senderId,
+      text: data.text,
+      createdAt: Date.now(),
+    });
+  });
+}, []);
+//USEEFFECT FOR PRIVATE MESSAGES
+useEffect(() => {
+  arrivalMessage &&
+    currentChat?.members.includes(arrivalMessage.sender) &&
+    setMessages((prev) => [...prev, arrivalMessage]);
+}, [arrivalMessage, currentChat]);
+//USEEFFET TO CONNECT GET  ONLINE USERS
 useEffect(()=>{
   socket.current.emit('addUser',user._id);
   socket.current.on('getUsers',users=>{
@@ -30,15 +42,10 @@ useEffect(()=>{
   })
 },[user])
 
-// //USEEFFECT TO FETCH MESSAGES FROM SOCKET SEVER
-// useEffect(()=>{
-//   socket?.on("welcome",message=>{
-//     console.log(message);
-//   })
-// },[socket])
 
 
-  //USEEFFECT TO FETCH CONVERSATION DEATILS
+
+  //USEEFFECT TO FETCH CONVERSATION DETAILS
   useEffect(() => {
     axios.get('/conversation/' + user._id).then((resp) => {
       setConversations(resp?.data);
@@ -51,6 +58,18 @@ useEffect(()=>{
       setMessages(res.data)
     }).catch(err => console.log(err))
   }, [currentChat])
+
+//private chat 
+  const receiverId = currentChat?.members.find(
+    (member) => member !== user._id
+  );
+  
+  socket.current?.emit("sendMessage", {
+    senderId: user._id,
+    receiverId,
+    text: newMessage,
+  });
+  
 
   //NEW MESSAGES CREATING FUNCTION
   const handleSubmit = (e) => {
