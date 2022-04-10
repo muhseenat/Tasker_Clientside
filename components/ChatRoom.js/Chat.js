@@ -28,7 +28,7 @@ const Chat = () => {
         createdAt: Date.now(),
       });
     });
-  },[]);
+  }, []);
 
 
   //USEEFFECT FOR PRIVATE MESSAGES
@@ -66,18 +66,15 @@ const Chat = () => {
   }, [currentChat])
 
   //private chat 
-  const receiverId = currentChat?.members.find(member => member !== user._id);
 
-  socket.current?.emit("sendMessage", {
-    senderId: user._id,
-    receiverId,
-    text: newMessage,
-  });
+
 
 
   //NEW MESSAGES CREATING FUNCTION
   const handleSubmit = (e) => {
     e.preventDefault();
+    const receiverId = currentChat?.members.find(member => member !== user._id);
+
     const message = {
       sender: user._id,
       text: newMessage,
@@ -86,6 +83,11 @@ const Chat = () => {
     axios.post('/messages', message).then((res) => {
       setMessages([...messages, res.data])
       setNewMessage("");
+      socket.current?.emit("sendMessage", {
+        senderId: user._id,
+        receiverId,
+        text: newMessage,
+      });
     }).catch((err) => {
       console.log(err);
     })
@@ -101,7 +103,6 @@ const Chat = () => {
       <div className="messenger">
         <div className="chatMenu">
           <div className="chatMenuWrapper">
-            <input placeholder="Search for friends" className="chatMenuInput" />
 
             {conversations.map((c, index) => (
               <div onClick={() => setCurrentChat(c)} key={index}>

@@ -49,19 +49,13 @@ const login = () => {
         dispatch(setUserDetails(res.data))
 
         localStorage.setItem("user", JSON.stringify(res.data))
-        toast.success('Login Succesfull', {
-          position: "top-center",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          });
-        router.push({
-          pathname: '/',
-          query: { returnUrl: router.asPath }
-        })
+        toast.success('Login Succesfull');
+        setTimeout(() => {
+          router.push({
+            pathname: '/',
+            query: { returnUrl: router.asPath }
+          })
+        }, 2000)
       }
     } catch (error) {
       console.log(error.response)
@@ -75,7 +69,7 @@ const login = () => {
         pauseOnHover: true,
         draggable: true,
         progress: undefined,
-        });
+      });
 
     }
   }
@@ -86,7 +80,7 @@ const login = () => {
 
 
       <div>
-      <ToastContainer />
+        <ToastContainer />
         <h3 className={loginStyles.heading}>Login </h3>
 
         <div className={loginStyles.app}>
