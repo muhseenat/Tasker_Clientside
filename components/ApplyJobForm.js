@@ -3,7 +3,9 @@ import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import axios from '../axios'
 import { ToastContainer, toast } from 'react-toastify';
-
+import { useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as Yup from 'yup';
 const ApplyJobForm = () => {
   const user = useSelector(state => state.user?.userData);
   const router = useRouter();
@@ -32,27 +34,58 @@ const ApplyJobForm = () => {
   }
   console.log(formData,'this is form data');
   const [data, setData] = useState(formData)
-  const updateFormData = (e) => {
-    const name = e.target.name;
-    const value = e.target.value;
-    setData({ ...data, [name]: value });
-  }
+ 
+  const validationSchema = Yup.object().shape({
+		name: Yup.string()
+			.required('Name is required'),
+		email: Yup.string()
+			.required('Email is required')
+			.email('Email is invalid'),
+		place: Yup.string()
+			.required('Place is required'),
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+		qualification: Yup.string()
+			.required('Qualification is required'),
+		skill: Yup.string()
+			.required('Skill  is required'),
+    experience: Yup.string()
+			.required('Experience  is required'),
+	})
+	const formOptions = { resolver: yupResolver(validationSchema) };
+
+	const { register, handleSubmit, formState } = useForm(formOptions);
+	const { errors } = formState;
+  const onSubmit = (data) => {
 
     console.log(data, 'this is gong data');
+    data={...data,
+     user_id: user?._id,
+    provider_id:jobDetails[0].user_id,
+    job_name:jobDetails[0].job_designation,
+    province:jobDetails[0].province,
+    city:jobDetails[0].city,
+    pay:jobDetails[0].minimum_pay,
+    expiry_date:jobDetails[0].to,
+    job_id: id,
+    
+    }
+    console.log('this is new datatatat');
     axios.post('/apply/job', data).then((res) => {
       toast.success('Apply Successfully', {
         position: "top-center",
-        autoClose: 5000,
+        autoClose: 2000,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,
         draggable: true,
         progress: undefined,
         });
-      // router.push('/jobs');
+        setTimeout(() => {
+          router.push({
+            pathname: '/jobs',
+            query: { returnUrl: router.asPath }
+          })
+        }, 2000)
       setData(formData)
 
     }).catch(err => console.log(err))
@@ -64,25 +97,37 @@ const ApplyJobForm = () => {
 
       <div className="container">
       <ToastContainer />
-        <form id="contact" action="" method="post" onSubmit={handleSubmit}>
+        <form id="contact" action="" method="post"  onSubmit={handleSubmit(onSubmit)}>
           <h3>Apply Form</h3>
           <fieldset>
-            <input placeholder="Your Name" type="text" tabindex="1" name='name' required autofocus onChange={(e) => updateFormData(e)} />
+            <input placeholder="Your Name" type="text" tabindex="1" {...register('name')} autofocus  />
+           <p className='red'>{errors.name?.message}</p>
           </fieldset>
           <fieldset>
-            <input placeholder="Your Place" type="text" tabindex="2" name='place' onChange={(e) => updateFormData(e)} required />
+            <input placeholder="Your Place" type="text" tabindex="2"  {...register('place')}   />
+           <p className='red'>{errors.place?.message}</p>
+
           </fieldset>
           <fieldset>
-            <input placeholder="Your Email" type="email" name='email' onChange={(e) => updateFormData(e)} tabindex="3" />
+            <input placeholder="Your Email" type="email"  {...register('email')}   tabindex="3" />
+           <p className='red'>{errors.email?.message}</p>
+
           </fieldset>
           <fieldset>
-            <input placeholder="Your Qualification" type="text" name='qualification' onChange={(e) => updateFormData(e)} tabindex="4" />
+           
+            <input placeholder="Your Qualification" type="text"  {...register('qualification')}   tabindex="4" />
+           <p className='red'>{errors.qualification?.message}</p>
+
           </fieldset>
           <fieldset>
-            <input placeholder="Skills" type="text" tabindex="4" name='skill' onChange={(e) => updateFormData(e)} required />
+            <input placeholder="Skills" type="text" tabindex="4"  {...register('skill')}    />
+           <p className='red'>{errors.skill?.message}</p>
+
           </fieldset>
           <fieldset>
-            <textarea placeholder="Any Experience" tabindex="5" name='experience' onChange={(e) => updateFormData(e)} required></textarea>
+            <textarea placeholder="Any Experience" tabindex="5"  {...register('experience')} ></textarea>
+           <p className='red'>{errors.experience?.message}</p>
+
           </fieldset>
           <fieldset>
             <button name="submit" type="submit" id="contact-submit" data-submit="...Sending">Submit</button>

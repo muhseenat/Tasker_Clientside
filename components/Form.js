@@ -16,7 +16,7 @@ const Form = () => {
   // }
   const notify = () => toast.success('Successfully Posted', {
     position: "top-center",
-    autoClose: 5000,
+    autoClose: 2000,
     hideProgressBar: false,
     closeOnClick: true,
     pauseOnHover: true,
@@ -72,8 +72,13 @@ const Form = () => {
       const res = await axios.post('/create/job', formData)
       if (res) {
         setFormData(data);
-        notify()
-        router.push('/')
+        toast.success('Successfully Posted')
+        setTimeout(() => {
+          router.push({
+            pathname: '/jobs',
+            query: { returnUrl: router.asPath }
+          })
+        }, 2000)
       }
     } catch (error) {
       console.log(error);
@@ -87,7 +92,7 @@ const Form = () => {
       <h3 className='text-center py-3'>POST JOB</h3>
       <ToastContainer
         position="top-center"
-        autoClose={5000}
+        autoClose={2000}
         hideProgressBar={false}
         newestOnTop={false}
         closeOnClick

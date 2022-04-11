@@ -48,17 +48,19 @@ const signup = () => {
 				localStorage.setItem("user", JSON.stringify(res.data))
 				toast.success('Login Succesfull', {
 					position: "top-center",
-					autoClose: 5000,
+					autoClose: 2000,
 					hideProgressBar: false,
 					closeOnClick: true,
 					pauseOnHover: true,
 					draggable: true,
 					progress: undefined,
 					});
-				// router.push({
-				// 	pathname: '/',
-				// 	query: { returnUrl: router.asPath }
-				// })
+					setTimeout(() => {
+						router.push({
+						  pathname: '/',
+						  query: { returnUrl: router.asPath }
+						})
+					  }, 2000)
 			}
 		} catch (error) {
 			setSignupError(error.response?.data?.err) 

@@ -17,6 +17,12 @@ const appliedJobs = () => {
       //success bar
       toast.success('Post deleted succesfully')
       // router.push('/jobs'); //want to add this bu t tastify not working.
+      setTimeout(() => {
+        router.push({
+          pathname: '/jobs',
+          query: { returnUrl: router.asPath }
+        })
+      }, 2000)
     }).catch(err => console.log(err))
   }
 
@@ -27,7 +33,7 @@ const appliedJobs = () => {
         <h2 className='text-center mt-2'>POSTED JOBS</h2>
         <ToastContainer
           position="top-center"
-          autoClose={5000}
+          autoClose={2000}
           hideProgressBar={false}
           newestOnTop={false}
           closeOnClick

@@ -5,7 +5,6 @@ import Link from 'next/link'
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
 import loginStyles from '../styles/Login.module.css';
-import { Snackbar, Stack, Button, MuiAlert } from '@mui/material';
 import axios from '../axios';
 import { useDispatch, useSelector } from 'react-redux';
 import { setUserDetails } from '../store/actions/userActions'
@@ -49,7 +48,15 @@ const login = () => {
         dispatch(setUserDetails(res.data))
 
         localStorage.setItem("user", JSON.stringify(res.data))
-        toast.success('Login Succesfull');
+        toast.success('Login Succesfull',{
+          position: "top-center",
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
         setTimeout(() => {
           router.push({
             pathname: '/',
