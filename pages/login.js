@@ -57,12 +57,12 @@ const login = () => {
           draggable: true,
           progress: undefined,
         });
-        setTimeout(() => {
+      
           router.push({
             pathname: '/',
             query: { returnUrl: router.asPath }
           })
-        }, 2000)
+      
       }
     } catch (error) {
       console.log(error.response)
