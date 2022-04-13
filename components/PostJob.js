@@ -3,13 +3,13 @@ import Link from 'next/link'
 const PostJob = () => {
     return (
         <>
-            <section class="apply py-5">
-                <div class="container py-5">
-                    <div class="row py-5">
-                        <div class="col-lg-7">
-                            <p class="red pt-5">WHAT WE ARE DOING</p>
+            <section className="apply py-5">
+                <div className="container py-5">
+                    <div className="row py-5">
+                        <div className="col-lg-7">
+                            <p className="red pt-5">WHAT WE ARE DOING</p>
                             <h1>24k Talented people are getting Jobs</h1>
-                            <p class="py-4"></p>
+                            <p className="py-4"></p>
                             <p>Post your works here and find suitable partner.</p>
                             <Link href='postjob'><button className="btn4 mt-3 ">POST A JOB</button></Link>
                         </div>
