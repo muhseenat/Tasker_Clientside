@@ -2,10 +2,16 @@ import { Navbar, Container, Nav, NavDropdown, Form, FormControl, Button } from '
 import styles from '.././styles/Navbar.module.css'
 import { useSelector, useDispatch } from 'react-redux';
 import Link from 'next/link'
+import {useState} from 'react'
+import {useRouter} from 'next/router';
 
 function AppBar() {
   const user = useSelector(state => state.user.userData);
-
+  const [search,setSearch] = useState()
+  const router = useRouter();
+const onSearch=()=>{
+   router.push(`/jobs?search=${search}`)
+}
 
   return (
     <>
@@ -24,15 +30,16 @@ function AppBar() {
 
 
             </Nav>
-            <Form className="d-flex justify-content-center">
+            <div className="d-flex justify-content-center">
               <FormControl
                 type="search"
                 placeholder="Search"
                 className="me-2"
                 aria-label="Search"
-              />
-              <a className='btn btn-success' style={{ marginRight: "10px" }}>Search</a>
-            </Form>
+                onChange={(e)=>{setSearch(e.target.value)}} />
+             
+              <button className='btn btn-success' style={{ marginRight: "10px" }} onClick={()=>{onSearch()}}>Search</button>
+            </div>
             <Form >
               {user ? <Link href='/profile'><a className='btn btn-success' >My Account</a></Link>
                 :

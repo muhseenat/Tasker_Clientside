@@ -8,10 +8,36 @@ import { useRouter } from 'next/router'
 const SingleJob = () => {
   const dispatch = useDispatch();
   const [jobs, setJobs] = useState([{}]);
-  const router=useRouter();
+  const {push,query}=useRouter();
+  console.log(query,'thuis dfhjk');
+  console.log(query.search,'thuis dfhbfghfghjk');
   const user=useSelector(state=>state.user.userData);
+  // {categories.map((catg,index)=>
+  //   <div className='row py-5' key={index}>
+  //        <div className='col-lg-3'>
+  //            <div className='card py-3'>
+  //                <div className='card-body'>
+  //                    <img src="https://jqlacorte.com/wp-content/uploads/2015/09/jql-job-seekers.png?format=auto&height=80&version=1592223909&width=80" className='img-fluid' />
+  //                    <h6>{catg.name}</h6>
+  //                    <h6 className='red'>(25)</h6>
+  //                </div>
+  //            </div>
+  //        </div>
+  //    </div> ) }
+  
+  // useEffect(() => {
+  //   axios.get(`/get/jobs?search=${query.search}`).then((res) => {
+     
+  //    dispatch(setJobDetails(res.data))
+  //    localStorage.setItem('jobs',JSON.stringify(res.data))
+  //     setJobs(res.data)
+  //     console.log(res.data);
+  //   }).catch((err) => {
+  //     console.log(err);
+  //   })
+  // }, [])
   useEffect(() => {
-    axios.get('/get/jobs').then((res) => {
+    axios.get(`/get/jobs?search=${query.search}`).then((res) => {
      
      dispatch(setJobDetails(res.data))
      localStorage.setItem('jobs',JSON.stringify(res.data))
@@ -20,7 +46,7 @@ const SingleJob = () => {
     }).catch((err) => {
       console.log(err);
     })
-  }, [])
+  }, [query])
   const job=useSelector(state=>state.user.userData);
 
   const createConversation=(receiverId)=>{
@@ -30,7 +56,7 @@ const SingleJob = () => {
      }
   console.log(data,'this is data');
   axios.post('/conversation',data).then((resp)=>{
-   router.push('/chat')
+   push('/chat')
   })
   }
 

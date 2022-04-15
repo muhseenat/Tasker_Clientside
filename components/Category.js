@@ -1,5 +1,20 @@
+import {useState,useEffect} from 'react';
+import axios from '../axios'
+import {useRouter} from 'next/router'
+const Category = ({categories,button}) => {
+    // const [categories, setCategories] = useState([])
+    const {push} = useRouter()
+    // useEffect(() => {
 
-const Category = () => {
+    //     axios.get('/admin/get/category').then((resp) => {
+    //       console.log(resp);
+    //       setCategories(resp?.data.slice(0,4))
+    //     }).catch(err => console.log(err))
+    //   }, [])
+
+      const onSearch=(search)=>{
+        push(`/jobs?search=${search}`)
+     }
 
     return (
         <>
@@ -9,52 +24,28 @@ const Category = () => {
                     <div className='row py-5'>
                         <div className='col-lg-11 m-auto pt-3'>
                             <div className='row py-5'>
-                                <div className='col-lg-3'>
+                          {categories.map((i,index)=>
+                          <div className='col-lg-3 mt-5'key={index} onClick={()=>onSearch(i?.name)}>
                                     <div className='card py-3'>
                                         <div className='card-body'>
                                             <img src="https://jqlacorte.com/wp-content/uploads/2015/09/jql-job-seekers.png?format=auto&height=80&version=1592223909&width=80" className='img-fluid' />
-                                            <h6>Electrician</h6>
-                                            <h6 className='red'>(25)</h6>
+                                            <h6>{i.name}</h6>
                                         </div>
                                     </div>
-                                </div>
-                                <div className='col-lg-3'>
-                                    <div className='card py-3'>
-                                        <div className='card-body'>
-                                            <img src="https://jqlacorte.com/wp-content/uploads/2015/09/jql-job-seekers.png?format=auto&height=80&version=1592223909&width=80" className='img-fluid' />
-                                            <h6>Electrician</h6>
-                                            <h6 className='red'>(25)</h6>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className='col-lg-3'>
-                                    <div className='card py-3'>
-                                        <div className='card-body'>
-                                            <img src="https://jqlacorte.com/wp-content/uploads/2015/09/jql-job-seekers.png?format=auto&height=80&version=1592223909&width=80" className='img-fluid' />
-                                            <h6>Electrician</h6>
-                                            <h6 className='red'>(25)</h6>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className='col-lg-3'>
-                                    <div className='card py-3'>
-                                        <div className='card-body'>
-                                            <img src="https://jqlacorte.com/wp-content/uploads/2015/09/jql-job-seekers.png?format=auto&height=80&version=1592223909&width=80" className='img-fluid' />
-                                            <h6>Electrician</h6>
-                                            <h6 className='red'>(25)</h6>
-                                        </div>
-                                    </div>
-                                </div>
+                                </div> )}
+                               
+                             
+                                  
 
 
                             </div>
-                            <div className="row">
+                           {button && <div className="row">
                                 <div className="col-lg-12">
                                     <div className="browse-btn2 text-center mt-50">
-                                        <button className='btn2'><a href="#" className="border-btn2 ">Browse All Sectors</a></button>
+                                        <button className='btn2'><a href="#" className="border-btn2 "onClick={(e)=>push('/categories')}>Browse All Sectors</a></button>
                                     </div>
                                 </div>
-                            </div>
+                            </div>}
                         </div>
                     </div>
                 </div>
