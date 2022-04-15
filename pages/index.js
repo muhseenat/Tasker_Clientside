@@ -9,6 +9,9 @@ import AppBar from "../components/Nav"
 import { useState, useEffect } from 'react';
 import axios from '../axios'
 import { setJobDetails } from '../store/actions/jobAction'
+import { useDispatch } from 'react-redux'
+import Taskers from "../components/Taskers"
+
 
 const index = () => {
   const [categories, setCategories] = useState([])
@@ -21,7 +24,7 @@ const index = () => {
       setCategories(resp?.data.slice(0, 4))
     }).catch(err => console.log(err))
 
-    axios.get(`/get/jobs?search=${query.search}`).then((res) => {
+    axios.get(`/get/jobs`).then((res) => {
       dispatch(setJobDetails(res.data))
       localStorage.setItem('jobs', JSON.stringify(res.data))
     }).catch((err) => {
@@ -39,7 +42,8 @@ const index = () => {
       <ApplyJob />
       <WorkFlow />
       <PostJob />
-      <JobProviders />
+      {/* <JobProviders /> */}
+      <Taskers/>
       <Footer />
     </>
   )

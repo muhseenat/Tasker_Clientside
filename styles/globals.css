@@ -119,9 +119,13 @@ transition: all 0.4s;
   border-radius: 50%;
 }
 .avatar{
-  height: 130px;
-  width: 130px;
+  height: 250px;
+  width: 250px;
   border-radius: 50%;
+}
+.slider{
+  background: #F7F7F7;
+  color:black
 }
 .perac{
   font-size: 1.6rem;
