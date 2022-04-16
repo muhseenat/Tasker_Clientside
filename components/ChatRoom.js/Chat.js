@@ -18,7 +18,7 @@ const Chat = () => {
 
   //USEEFFECT TO CONNECT TO WS & GET MESSAGES
   useEffect(() => {
-    socket.current = io("ws://tasker-01.herokuapp.com");
+    socket.current = io("wss://tasker-01.herokuapp.com");
     socket.current.on("getMessage", (data) => {
       setArrivalMessage({
         sender: data.senderId,
