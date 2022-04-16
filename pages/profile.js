@@ -5,7 +5,7 @@ import { useRouter } from 'next/router'
 import { useSelector, useDispatch } from 'react-redux'
 import { setUserDetails } from '../store/actions/userActions';
 
-const profile = () => {
+const Profile = () => {
   const dispatch = useDispatch();
   const router = useRouter()
   const user = useSelector(state => state.user.userData);
@@ -115,4 +115,4 @@ const profile = () => {
   )
 }
 
-export default profile
+export default Profile

@@ -20,7 +20,7 @@ const Chat = () => {
 
   //USEEFFECT TO CONNECT TO WS & GET MESSAGES
   useEffect(() => {
-    socket.current = io("ws://localhost:8900");
+    socket.current = io("ws://tasker-01.herokuapp.com");
     socket.current.on("getMessage", (data) => {
       setArrivalMessage({
         sender: data.senderId,
@@ -117,9 +117,9 @@ const Chat = () => {
               <>
                 <div className="chatBoxTop">
 
-                  {messages?.map((m) => (
+                  {messages?.map((m,index) => (
                     <div
-                      ref={scrollRef}
+                      ref={scrollRef} key={index}
                     >
                       <Message message={m}
                         own={m.sender === user._id}

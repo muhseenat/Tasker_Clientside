@@ -1,16 +1,16 @@
 import React from 'react'
-import Chat from '../components/ChatRoom.js/Chat'
+import Chats from '../components/ChatRoom.js/Chat'
 import AppBar from '../components/Nav'
 
-const chat = () => {
+const Chat = () => {
   return (
 <>
 <AppBar/>
-<Chat/>
+<Chats/>
 
 
 </>
     )
 }
 
-export default chat
+export default Chat

@@ -100,32 +100,32 @@ const ApplyJobForm = () => {
         <form id="contact" action="" method="post"  onSubmit={handleSubmit(onSubmit)}>
           <h3>Apply Form</h3>
           <fieldset>
-            <input placeholder="Your Name" type="text" tabindex="1" {...register('name')} autofocus  />
+            <input placeholder="Your Name" type="text" tabIndex="1" {...register('name')} autoFocus  />
            <p className='red'>{errors.name?.message}</p>
           </fieldset>
           <fieldset>
-            <input placeholder="Your Place" type="text" tabindex="2"  {...register('place')}   />
+            <input placeholder="Your Place" type="text" tabIndex="2"  {...register('place')}   />
            <p className='red'>{errors.place?.message}</p>
 
           </fieldset>
           <fieldset>
-            <input placeholder="Your Email" type="email"  {...register('email')}   tabindex="3" />
+            <input placeholder="Your Email" type="email"  {...register('email')}   tabIndex="3" />
            <p className='red'>{errors.email?.message}</p>
 
           </fieldset>
           <fieldset>
            
-            <input placeholder="Your Qualification" type="text"  {...register('qualification')}   tabindex="4" />
+            <input placeholder="Your Qualification" type="text"  {...register('qualification')}   tabIndex="4" />
            <p className='red'>{errors.qualification?.message}</p>
 
           </fieldset>
           <fieldset>
-            <input placeholder="Skills" type="text" tabindex="4"  {...register('skill')}    />
+            <input placeholder="Skills" type="text" tabIndex="4"  {...register('skill')}    />
            <p className='red'>{errors.skill?.message}</p>
 
           </fieldset>
           <fieldset>
-            <textarea placeholder="Any Experience" tabindex="5"  {...register('experience')} ></textarea>
+            <textarea placeholder="Any Experience" tabIndex="5"  {...register('experience')} ></textarea>
            <p className='red'>{errors.experience?.message}</p>
 
           </fieldset>

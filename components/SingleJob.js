@@ -9,13 +9,10 @@ const SingleJob = () => {
   const dispatch = useDispatch();
   const [jobs, setJobs] = useState([{}]);
   const {push,query}=useRouter();
-  console.log(query,'thuis dfhjk');
-  console.log(query.search,'thuis dfhbfghfghjk');
   const user=useSelector(state=>state.user.userData);
   
   useEffect(() => {
-    axios.get(`/get/jobs?search=${query.search}`).then((res) => {
-     
+    axios.get(`/get/jobs${query.search?'?search='+query.search:''}`).then((res) => {
      dispatch(setJobDetails(res.data))
      localStorage.setItem('jobs',JSON.stringify(res.data))
       setJobs(res.data?.filter(i=>i.user_id!=user._id&&i.status!="Done"))

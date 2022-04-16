@@ -2,7 +2,7 @@ import React from 'react'
 import AppBar from '../components/Nav'
 import DataTable from '../components/DataTable'
 import SingleUserAppliedJobs from '../components/SingleUserAppliedJobs'
-const appliedJobs = () => {
+const AppliedJobs = () => {
   return (
     <>
       <AppBar />
@@ -12,4 +12,4 @@ const appliedJobs = () => {
   )
 }
 
-export default appliedJobs;
+export default AppliedJobs;

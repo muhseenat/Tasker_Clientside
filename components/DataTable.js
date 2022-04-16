@@ -109,9 +109,9 @@ const DataTable = () => {
                             }
                         />
                         <tbody>
-                            {commentsData.map(comment => (
-                                <tr>
-                                    <th scope="row" key={comment.job_id}>
+                            {commentsData.map((comment,index) => (
+                                <tr key={index}>
+                                    <th scope="row">
                                         {comment.job_name}
                                     </th>
                                     <td>{comment.pay}</td>

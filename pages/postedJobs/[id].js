@@ -5,7 +5,7 @@ import { useRouter } from 'next/router';
 import axios from '../../axios'
 import Link from 'next/link';
 import { ToastContainer, toast } from 'react-toastify'; 
-const appliedJobs = () => {
+const AppliedJobs = () => {
  
   const router = useRouter()
   const allJob = useSelector(state => state.jobs?.jobData)
@@ -84,4 +84,4 @@ const appliedJobs = () => {
   )
 }
 
-export default appliedJobs
+export default AppliedJobs

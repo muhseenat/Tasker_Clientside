@@ -1,7 +1,7 @@
 import React from 'react'
 import AppBar from '../components/Nav'
 import SingleJob from '../components/SingleJob'
-const jobs = () => {
+const Jobs = () => {
   return (
 
 
@@ -13,4 +13,4 @@ const jobs = () => {
   )
 }
 
-export default jobs
+export default Jobs

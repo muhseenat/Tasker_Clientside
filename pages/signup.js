@@ -10,7 +10,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { ToastContainer, toast } from 'react-toastify';
 import { setUserDetails } from '../store/actions/userActions'
 
-const signup = () => {
+const Signup = () => {
 
 	const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/
 
@@ -129,4 +129,4 @@ const signup = () => {
 	)
 }
 
-export default signup
+export default Signup

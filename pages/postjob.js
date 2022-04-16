@@ -2,7 +2,7 @@ import React from 'react';
 import AppBar from '../components/Nav'
 import Form from '../components/Form';
 
-const postjob = () => {
+const Postjob = () => {
   return (
     <>
       <AppBar />
@@ -13,4 +13,4 @@ const postjob = () => {
 
 }
 
-export default postjob
+export default Postjob

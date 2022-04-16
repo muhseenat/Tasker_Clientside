@@ -4,7 +4,7 @@ import AppBar from '../components/Nav'
 import {useState,useEffect} from 'react';
 import axios from '../axios'
 
-const categories = () => {
+const Categories = () => {
     const [categories, setCategories] = useState([])
     useEffect(() => {
   
@@ -25,4 +25,4 @@ const categories = () => {
     )
 }
 
-export default categories
+export default Categories

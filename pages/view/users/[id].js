@@ -12,7 +12,7 @@ const Pagination = dynamic(() => import('../../../components/DataTable/Paginatio
 const Search = dynamic(() => import('../../../components/DataTable/Search'))
 
 
-const postedJobUsers = () => {
+const PostedJobUsers = () => {
     const [comments, setComments] = useState([]);
     const [loader, showLoader, hideLoader] = useFullPageLoader();
     const [totalItems, setTotalItems] = useState(0);
@@ -128,9 +128,9 @@ const postedJobUsers = () => {
                                 }
                             />
                             <tbody>
-                                {commentsData.map(comment => (
+                                {commentsData.map((comment,index) => (
                                     <tr>
-                                        <th scope="row" key={comment?.No}>
+                                        <th scope="row" key={index}>
                                             {comment?.name}
                                         </th>
                                         <td>{comment?.email}</td>
@@ -173,4 +173,4 @@ const postedJobUsers = () => {
     )
 }
 
-export default postedJobUsers 
+export default PostedJobUsers 

@@ -13,9 +13,7 @@ import { ToastContainer, toast } from 'react-toastify';
 
 
 
-const login = () => {
-
-  ;
+const Login = () => {
 
 
   const dispatch = useDispatch()
@@ -34,7 +32,7 @@ const login = () => {
   const formOptions = { resolver: yupResolver(validationSchema) };
 
   // get functions to build form with useForm() hook
-  const { register, handleSubmit, reset, formState } = useForm(formOptions);
+  const { register, handleSubmit,  formState } = useForm(formOptions);
   const { errors } = formState;
   const router = useRouter();
   const [loginError, setLoginError] = useState("")
@@ -148,4 +146,4 @@ const login = () => {
   )
 }
 
-export default login
+export default Login

@@ -2,7 +2,7 @@ import React from 'react'
 import ApplyJobForm from '../../components/ApplyJobForm'
 import AppBar from '../../components/Nav'
 
-const applyJob = () => {
+const ApplyJob = () => {
   return (
     <>
       <AppBar />
@@ -14,4 +14,4 @@ const applyJob = () => {
   )
 }
 
-export default applyJob
+export default ApplyJob
