@@ -2,7 +2,6 @@ import AppBar from '../../../components/Nav'
 import { useRouter } from 'next/router'
 import axios from '../../../axios'
 import dynamic from 'next/dynamic'
-import useFullPageLoader from '../../../hook/useFullPageLoader'
 import { useSelector } from 'react-redux';
 import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
@@ -14,9 +13,10 @@ const Search = dynamic(() => import('../../../components/DataTable/Search'))
 
 const PostedJobUsers = () => {
     const [comments, setComments] = useState([]);
-    const [loader, showLoader, hideLoader] = useFullPageLoader();
     const [totalItems, setTotalItems] = useState(0);
     const [currentPage, setCurrentPage] = useState(1);
+    const [show, setShow] = useState(false)
+
     const [search, setSearch] = useState("");
     const [sorting, setSorting] = useState({ field: "", order: "" });
     const user = useSelector(state => state.user.userData)
@@ -35,13 +35,13 @@ const PostedJobUsers = () => {
     useEffect(() => {
 
         const getData = () => {
-            showLoader();
 
             axios.get(`job/applied/user/${id}`).then((resp) => {
-                hideLoader();
                 console.log(resp?.data);
                 setComments(resp?.data);
-
+                if (resp?.data?.length == 0) {
+                    setShow(true)
+                }
             }).catch(err => console.log(err))
 
         };
@@ -127,9 +127,11 @@ const PostedJobUsers = () => {
                                     setSorting({ field, order })
                                 }
                             />
+                            {show && <h3 className='mt-5'>NO JOBS  APPLIEDYET...</h3>}
+
                             <tbody>
-                                {commentsData.map((comment,index) => (
-                                    <tr  key={index}>
+                                {commentsData.map((comment, index) => (
+                                    <tr key={index}>
                                         <th scope="row">
                                             {comment?.name}
                                         </th>
@@ -167,7 +169,6 @@ const PostedJobUsers = () => {
                         </table>
                     </div>
                 </div>
-                {loader}
             </div>
         </>
     )

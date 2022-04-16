@@ -18,7 +18,10 @@ const Appliedjobs = () => {
   useEffect(()=>{
   axios.get(`/get/jobs/${id}`).then((res)=>{
     setJob(res.data?.filter(i=>i.user_id==user?._id))
-
+    if(job.length==0){
+      setShow(true)
+    }
+  
   }).catch(err=>console.log(err))
   },[id])
 
@@ -37,9 +40,6 @@ const Appliedjobs = () => {
         })
       }, 2000)
     }).catch(err => console.log(err))
-  }
-  if(job.length==0){
-    setShow(true)
   }
 
   return (
