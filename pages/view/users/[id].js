@@ -129,8 +129,8 @@ const PostedJobUsers = () => {
                             />
                             <tbody>
                                 {commentsData.map((comment,index) => (
-                                    <tr>
-                                        <th scope="row" key={index}>
+                                    <tr  key={index}>
+                                        <th scope="row">
                                             {comment?.name}
                                         </th>
                                         <td>{comment?.email}</td>
