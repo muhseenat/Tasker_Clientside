@@ -1,7 +1,6 @@
 
 import dynamic from 'next/dynamic'
 import React, { useEffect, useState, useMemo } from "react";
-import useFullPageLoader from '../hook/useFullPageLoader'
 import { useSelector } from 'react-redux';
 import axios from '../axios';
 const TableHeader = dynamic(() => import('./DataTable/Header'))
@@ -10,13 +9,12 @@ const Search = dynamic(() => import('./DataTable/Search'))
 
 const DataTable = () => {
     const [comments, setComments] = useState([]);
-    const [loader, showLoader, hideLoader] = useFullPageLoader();
     const [totalItems, setTotalItems] = useState(0);
     const [currentPage, setCurrentPage] = useState(1);
     const [search, setSearch] = useState("");
     const [sorting, setSorting] = useState({ field: "", order: "" });
     const user = useSelector(state => state.user.userData)
-    const id = user._id
+    const id = user?._id
     const ITEMS_PER_PAGE = 3;
 
     const headers = [
@@ -29,10 +27,8 @@ const DataTable = () => {
     useEffect(() => {
 
         const getData = () => {
-            showLoader();
 
             axios.get(`/user/applied/job/${id}`).then((resp) => {
-                hideLoader();
                 console.log(resp?.data);
                 console.log(resp?.data[0]?.applied_jobs);
                 setComments(resp?.data[0]?.applied_jobs);
@@ -124,7 +120,6 @@ const DataTable = () => {
                     </table>
                 </div>
             </div>
-            {loader}
         </div>
     );
 };

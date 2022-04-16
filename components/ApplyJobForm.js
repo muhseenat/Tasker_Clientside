@@ -6,24 +6,24 @@ import { ToastContainer, toast } from 'react-toastify';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
+
+
+
 const ApplyJobForm = () => {
   const user = useSelector(state => state.user?.userData);
+  const jobs = useSelector(state => state.jobs?.jobData||[]);
+  const jobDetails = jobs.filter(job => job._id == id ||[])
   const router = useRouter();
-  if (!user) {
-    router.push('/login')
-  }
   const { id } = router.query
-  const jobs = useSelector(state=>state.jobs?.jobData);
-  console.log(jobs);
-  const jobDetails= jobs.filter(job=>job._id==id)
+  
   const formData = {
     user_id: user?._id,
-    provider_id:jobDetails[0].user_id,
-    job_name:jobDetails[0].job_designation,
-    province:jobDetails[0].province,
-    city:jobDetails[0].city,
-    pay:jobDetails[0].minimum_pay,
-    expiry_date:jobDetails[0].to,
+    provider_id: jobDetails[0]?.user_id,
+    job_name: jobDetails[0]?.job_designation,
+    province: jobDetails[0]?.province,
+    city: jobDetails[0]?.city,
+    pay: jobDetails[0]?.minimum_pay,
+    expiry_date: jobDetails[0]?.to,
     job_id: id,
     name: "",
     place: "",
@@ -32,44 +32,45 @@ const ApplyJobForm = () => {
     skill: "",
     experience: ""
   }
-  console.log(formData,'this is form data');
   const [data, setData] = useState(formData)
+
  
+  
+
   const validationSchema = Yup.object().shape({
-		name: Yup.string()
-			.required('Name is required'),
-		email: Yup.string()
-			.required('Email is required')
-			.email('Email is invalid'),
-		place: Yup.string()
-			.required('Place is required'),
+    name: Yup.string()
+      .required('Name is required'),
+    email: Yup.string()
+      .required('Email is required')
+      .email('Email is invalid'),
+    place: Yup.string()
+      .required('Place is required'),
 
-		qualification: Yup.string()
-			.required('Qualification is required'),
-		skill: Yup.string()
-			.required('Skill  is required'),
+    qualification: Yup.string()
+      .required('Qualification is required'),
+    skill: Yup.string()
+      .required('Skill  is required'),
     experience: Yup.string()
-			.required('Experience  is required'),
-	})
-	const formOptions = { resolver: yupResolver(validationSchema) };
+      .required('Experience  is required'),
+  })
+  const formOptions = { resolver: yupResolver(validationSchema) };
 
-	const { register, handleSubmit, formState } = useForm(formOptions);
-	const { errors } = formState;
+  const { register, handleSubmit, formState } = useForm(formOptions);
+  const { errors } = formState;
   const onSubmit = (data) => {
 
-    console.log(data, 'this is gong data');
-    data={...data,
-     user_id: user?._id,
-    provider_id:jobDetails[0].user_id,
-    job_name:jobDetails[0].job_designation,
-    province:jobDetails[0].province,
-    city:jobDetails[0].city,
-    pay:jobDetails[0].minimum_pay,
-    expiry_date:jobDetails[0].to,
-    job_id: id,
-    
+    data = {
+      ...data,
+      user_id: user?._id,
+      provider_id: jobDetails[0]?.user_id,
+      job_name: jobDetails[0]?.job_designation,
+      province: jobDetails[0]?.province,
+      city: jobDetails[0]?.city,
+      pay: jobDetails[0]?.minimum_pay,
+      expiry_date: jobDetails[0]?.to,
+      job_id: id,
+
     }
-    console.log('this is new datatatat');
     axios.post('/apply/job', data).then((res) => {
       toast.success('Apply Successfully', {
         position: "top-center",
@@ -79,54 +80,68 @@ const ApplyJobForm = () => {
         pauseOnHover: true,
         draggable: true,
         progress: undefined,
-        });
-        setTimeout(() => {
-          router.push({
-            pathname: '/jobs',
-            query: { returnUrl: router.asPath }
-          })
-        }, 2000)
+      });
+      setTimeout(() => {
+        router.push({
+          pathname: '/jobs',
+          query: { returnUrl: router.asPath }
+        })
+      }, 2000)
       setData(formData)
 
     }).catch(err => console.log(err))
   }
+useEffect(()=>{
 
 
+  if (!user) {
+    if(typeof window!==undefined){
+
+      router.push('/login')
+      return false;
+    }
+  }
+},[])
+
+  
+  if (!id) {
+    return null;
+  }
   return (
     <div>
 
       <div className="container">
-      <ToastContainer />
-        <form id="contact" action="" method="post"  onSubmit={handleSubmit(onSubmit)}>
+        <ToastContainer />
+        <form id="contact" action="" method="post" onSubmit={handleSubmit(onSubmit)}>
           <h3>Apply Form</h3>
           <fieldset>
-            <input placeholder="Your Name" type="text" tabIndex="1" {...register('name')} autoFocus  />
-           <p className='red'>{errors.name?.message}</p>
+            <input placeholder="Your Name" type="text" tabIndex="1" {...register('name')} autoFocus />
+            <p className='red'>{errors.name?.message}</p>
           </fieldset>
           <fieldset>
-            <input placeholder="Your Place" type="text" tabIndex="2"  {...register('place')}   />
-           <p className='red'>{errors.place?.message}</p>
+            <input placeholder="Your Place" type="text" tabIndex="2"  {...register('place')} />
+            <p className='red'>{errors.place?.message}</p>
 
           </fieldset>
           <fieldset>
-            <input placeholder="Your Email" type="email"  {...register('email')}   tabIndex="3" />
-           <p className='red'>{errors.email?.message}</p>
+            <input placeholder="Your Email" type="email"  {...register('email')} tabIndex="3" />
+            <p className='red'>{errors.email?.message}</p>
 
           </fieldset>
           <fieldset>
-           
-            <input placeholder="Your Qualification" type="text"  {...register('qualification')}   tabIndex="4" />
-           <p className='red'>{errors.qualification?.message}</p>
+
+            <input placeholder="Your Qualification" type="text"  {...register('qualification')} tabIndex="4" />
+            <p className='red'>{errors.qualification?.message}</p>
 
           </fieldset>
           <fieldset>
-            <input placeholder="Skills" type="text" tabIndex="4"  {...register('skill')}    />
-           <p className='red'>{errors.skill?.message}</p>
+            <input placeholder="Skills" type="text" tabIndex="4"  {...register('skill')} />
+            <p className='red'>{errors.skill?.message}</p>
 
           </fieldset>
           <fieldset>
             <textarea placeholder="Any Experience" tabIndex="5"  {...register('experience')} ></textarea>
-           <p className='red'>{errors.experience?.message}</p>
+            <p className='red'>{errors.experience?.message}</p>
 
           </fieldset>
           <fieldset>
@@ -291,10 +306,6 @@ fieldset {
     </div>
   )
 }
-
-
-
-
 
 
 export default ApplyJobForm;

@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useRef } from 'react'
-import ChatOnline from './ChatOnline'
 import Conversation from './Conversation'
 import Message from './Message'
 import { useSelector } from 'react-redux'
@@ -15,7 +14,6 @@ const Chat = () => {
   const socket = useRef()
   const scrollRef = useRef();
   const user = useSelector(state => state.user.userData)
-  console.log(user._id);
 
 
   //USEEFFECT TO CONNECT TO WS & GET MESSAGES
@@ -41,7 +39,7 @@ const Chat = () => {
 
   //USEEFFET TO CONNECT GET  ONLINE USERS
   useEffect(() => {
-    socket.current.emit('addUser', user._id);
+    socket.current.emit('addUser', user?._id);
     socket.current.on('getUsers', users => {
       setOnlineUsers(users)
       // setOnlineUsers(users)
@@ -53,10 +51,10 @@ const Chat = () => {
 
   //USEEFFECT TO FETCH CONVERSATION DETAILS
   useEffect(() => {
-    axios.get('/conversation/' + user._id).then((resp) => {
+    axios.get('/conversation/' + user?._id).then((resp) => {
       setConversations(resp?.data);
     }).catch(err => console.log(err))
-  }, [user._id])
+  }, [user?._id])
 
   //USEEFFECT TO FETCH MESSAGES OF CURRENT USER
   useEffect(() => {
@@ -73,18 +71,18 @@ const Chat = () => {
   //NEW MESSAGES CREATING FUNCTION
   const handleSubmit = (e) => {
     e.preventDefault();
-    const receiverId = currentChat?.members.find(member => member !== user._id);
+    const receiverId = currentChat?.members.find(member => member !== user?._id);
 
     const message = {
-      sender: user._id,
+      sender: user?._id,
       text: newMessage,
-      conversationId: currentChat._id,
+      conversationId: currentChat?._id,
     }
     axios.post('/messages', message).then((res) => {
       setMessages([...messages, res.data])
       setNewMessage("");
       socket.current?.emit("sendMessage", {
-        senderId: user._id,
+        senderId: user?._id,
         receiverId,
         text: newMessage,
       });
@@ -122,7 +120,7 @@ const Chat = () => {
                       ref={scrollRef} key={index}
                     >
                       <Message message={m}
-                        own={m.sender === user._id}
+                        own={m.sender === user?._id}
                       />
                     </div>
                   ))}
@@ -148,15 +146,7 @@ const Chat = () => {
             )}
           </div>
         </div>
-        {/* <div className="chatOnline">
-          <div className="chatOnlineWrapper">
-            <ChatOnline
-              onlineUsers={onlineUsers}
-              currentId={user._id}
-              setCurrentChat={setCurrentChat}
-            />
-          </div>
-        </div> */}
+     
       </div>
 
 

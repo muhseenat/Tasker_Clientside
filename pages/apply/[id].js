@@ -1,17 +1,14 @@
-import React from 'react'
-import ApplyJobForm from '../../components/ApplyJobForm'
-import AppBar from '../../components/Nav'
-
-const ApplyJob = () => {
+import Nav from '../../components/Nav'
+import { Fragment } from "react"
+import JobForm from '../../components/ApplyJobForm'
+export default function Applyjob() {
   return (
-    <>
-      <AppBar />
-      <ApplyJobForm />
-
-
-    </>
+    <Fragment>
+   <Nav/>
+<JobForm/>
+    </Fragment>
 
   )
 }
 
-export default ApplyJob
+ 

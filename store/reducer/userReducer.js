@@ -1,7 +1,7 @@
 import ACTION_CONSTANTS from "../actions/actionTypes";
 
 const initialState = {
-  userData:JSON.parse(typeof window!=='undefined'&& localStorage.getItem("user")),
+  userData:JSON.parse(typeof window!=='undefined'&& localStorage.getItem("user")||null),
  
 }
 

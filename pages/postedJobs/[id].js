@@ -1,16 +1,29 @@
-import React from 'react'
-import { useSelector } from 'react-redux'
+import React, { useEffect,useState} from 'react'
+import { useSelector,} from 'react-redux'
 import AppBar from '../../components/Nav'
 import { useRouter } from 'next/router';
 import axios from '../../axios'
 import Link from 'next/link';
 import { ToastContainer, toast } from 'react-toastify'; 
-const AppliedJobs = () => {
+const Appliedjobs = () => {
  
   const router = useRouter()
-  const allJob = useSelector(state => state.jobs?.jobData)
+  const [job,setJob]=useState([{}])
+  const [show,setShow]=useState(false)
+  const user=useSelector(state=>state.user.userData);
+  
   const { id } = router.query;
-  const jobs = allJob?.filter(job => job.user_id == id) || []
+  // const jobs = allJob?.filter(job => job.user_id == id) || [])
+
+  useEffect(()=>{
+  axios.get(`/get/jobs/${id}`).then((res)=>{
+    setJob(res.data?.filter(i=>i.user_id==user?._id))
+
+  }).catch(err=>console.log(err))
+  },[id])
+
+
+  //JOB CANCEL HANDLER
   const handleCancel = (jobId) => {
     // toast.warn('Are you Sure!');
     axios.delete(`/cancel/job/${jobId}`).then((resp) => {
@@ -24,6 +37,9 @@ const AppliedJobs = () => {
         })
       }, 2000)
     }).catch(err => console.log(err))
+  }
+  if(job.length==0){
+    setShow(true)
   }
 
   return (
@@ -42,7 +58,8 @@ const AppliedJobs = () => {
           draggable
           pauseOnHover
         />
-        {jobs.map((job, index) => {
+        {show && <h3 className='mt-5'>NO JOBS POSTED YET...</h3>}
+        {job.map((job, index) => {
           return (
             <div className="card mb-4 mt-4" key={{ index }}>
               <img src="https://images.unsplash.com/photo-1507679799987-c73779587ccf?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTR8fGpvYiUyMHNlYXJjaHxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60" className="card-img-top" alt="card-image" />
@@ -84,4 +101,4 @@ const AppliedJobs = () => {
   )
 }
 
-export default AppliedJobs
+export default Appliedjobs

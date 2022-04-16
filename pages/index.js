@@ -15,7 +15,7 @@ import Taskers from "../components/Taskers"
 const Index = () => {
   const [categories, setCategories] = useState([])
   const dispatch = useDispatch();
-  // const user = useSelector(state => state.user?.userData);
+  const user = useSelector(state => state.user?.userData);
 
   useEffect(() => {
 
@@ -24,12 +24,12 @@ const Index = () => {
       setCategories(resp?.data.slice(0, 4))
     }).catch(err => console.log(err))
 
-    axios.get(`/get/jobs`).then((res) => {
-      dispatch(setJobDetails(res.data))
-      localStorage.setItem('jobs', JSON.stringify(res.data))
-    }).catch((err) => {
-      console.log(err);
-    })
+    // axios.get(`/get/jobs`).then((res) => {
+    //   dispatch(setJobDetails(res.data))
+    //   localStorage.setItem('jobs', JSON.stringify(res.data))
+    // }).catch((err) => {
+    //   console.log(err);
+    // })
 
 
   }, [user?._id])
