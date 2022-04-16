@@ -18,7 +18,7 @@ const SingleJob = () => {
      
      dispatch(setJobDetails(res.data))
      localStorage.setItem('jobs',JSON.stringify(res.data))
-      setJobs(res.data?.map(i=>i.user_id!=user._id))
+      setJobs(res.data?.filter(i=>i.user_id!=user._id&&i.status!="Done"))
       console.log(res.data);
     }).catch((err) => {
       console.log(err);
@@ -74,6 +74,7 @@ const SingleJob = () => {
       }
       .card img {
         width: 30%;
+        object-fit:cover;
       }
     }
        `
