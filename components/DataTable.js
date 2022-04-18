@@ -29,8 +29,7 @@ const DataTable = () => {
         const getData = () => {
 
             axios.get(`/user/applied/job/${id}`).then((resp) => {
-                console.log(resp?.data);
-                console.log(resp?.data[0]?.applied_jobs);
+              
                 setComments(resp?.data[0]?.applied_jobs);
 
             }).catch(err => console.log(err))
@@ -41,7 +40,6 @@ const DataTable = () => {
     }, []);
 
 
-    console.log(comments, 'this is comments');
     //search function
     const commentsData = useMemo(() => {
         let computedComments = comments;

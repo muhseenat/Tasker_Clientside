@@ -10,11 +10,22 @@ const Chat = () => {
   const [messages, setMessages] = useState([])
   const [newMessage, setNewMessage] = useState("")
   const [arrivalMessage, setArrivalMessage] = useState(null);
-  const [onlineUsers, setOnlineUsers] = useState([])
+  // const [onlineUsers, setOnlineUsers] = useState([])
   const socket = useRef()
   const scrollRef = useRef();
   const user = useSelector(state => state.user.userData)
 
+  useEffect(()=>{
+
+
+    if (!user) {
+      if(typeof window!==undefined){
+  
+        router.push('/login')
+        return false;
+      }
+    }
+  },[])
 
   //USEEFFECT TO CONNECT TO WS & GET MESSAGES
   useEffect(() => {
@@ -38,13 +49,13 @@ const Chat = () => {
 
 
   //USEEFFET TO CONNECT GET  ONLINE USERS
-  useEffect(() => {
-    socket.current.emit('addUser', user?._id);
-    socket.current.on('getUsers', users => {
-      setOnlineUsers(users)
-      // setOnlineUsers(users)
-    })
-  }, [user])
+  // useEffect(() => {
+  //   socket.current.emit('addUser', user?._id);
+  //   // socket.current.on('getUsers', users => {
+  //   //   setOnlineUsers(users)
+  //   //   // setOnlineUsers(users)
+  //   // })
+  // }, [user])
 
 
 

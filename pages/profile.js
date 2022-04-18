@@ -19,7 +19,7 @@ const Profile = () => {
   return (
     <>
       <AppBar />
-      <body>
+      <div className='body'>
         <div className="container">
           <div className="cover-photo">
             <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSyHGvAsJP8rcCnvYDZvqvNfWcTUqRc2EDpvg&usqp=CAU" className="profile" />
@@ -110,7 +110,7 @@ const Profile = () => {
             `
           }
         </style>
-      </body>
+      </div>
     </>
   )
 }

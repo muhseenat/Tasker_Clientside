@@ -9,16 +9,12 @@ const SingleJob = () => {
   useEffect(() => {
     axios.get('/get/jobs').then((res) => {
 
-      console.log(res);
-      console.log('jobbbbb');
       setJobs(res.data)
-      console.log(res.data);
     }).catch((err) => {
       console.log(err);
     })
   }, [])
 
-  console.log(jobs);
   return (
 
     <>

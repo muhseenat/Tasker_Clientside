@@ -48,13 +48,11 @@ const PostedJobUsers = () => {
 
         getData();
     }, []);
-    console.log(comments, 'this is comments');
 
     //CHANGE STATUS
     const changeStatus = (e, id, userId, jobId) => {
         const data = { sts: e.target.value, id, userId, jobId }
         axios.put('/change/status', data).then((resp) => {
-            console.log(resp);
         }).catch(err => console.log(err))
 
     }
@@ -96,6 +94,8 @@ const PostedJobUsers = () => {
     return (
         <>
             <AppBar />
+            {/* {(show && <h3 className='mt-5 text-center'>NO JOBS  APPLIED YET...</h3>)}    */}
+
             <div className='container mt-5'>
                 <h3 className='text-center'>Applied Users</h3>
 
@@ -127,9 +127,9 @@ const PostedJobUsers = () => {
                                     setSorting({ field, order })
                                 }
                             />
-                            {show && <h3 className='mt-5'>NO JOBS  APPLIEDYET...</h3>}
 
                             <tbody>
+
                                 {commentsData.map((comment, index) => (
                                     <tr key={index}>
                                         <th scope="row">

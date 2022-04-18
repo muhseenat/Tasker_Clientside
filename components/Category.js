@@ -1,16 +1,8 @@
-import {useState,useEffect} from 'react';
-import axios from '../axios'
+
 import {useRouter} from 'next/router'
 const Category = ({categories,button}) => {
-    // const [categories, setCategories] = useState([])
     const {push} = useRouter()
-    // useEffect(() => {
-
-    //     axios.get('/admin/get/category').then((resp) => {
-    //       console.log(resp);
-    //       setCategories(resp?.data.slice(0,4))
-    //     }).catch(err => console.log(err))
-    //   }, [])
+   
 
       const onSearch=(search)=>{
         push(`/jobs?search=${search}`)

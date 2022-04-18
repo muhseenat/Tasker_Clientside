@@ -23,10 +23,10 @@ const Footer = () => {
                                 <div className="col-lg-3">
                                     <h3 className="py-5">IMPORTANT LINK</h3>
                                     <Link href='/profile'><p className="link"> My Account</p></Link>
+                                    <Link href='/jobs'><p className="link"> View jobs</p></Link>
+                                    <Link href='/'><p className="link"> Categories</p></Link>
+                                    <Link href='/'><p className="link"> Top Job Providers</p></Link>
 
-                                    <p className="link"> View jobs</p>
-                                    <p className="link"> Categories</p>
-                                    <p className="link"> Top Job Providers</p>
                                 </div>
                             </div>
                             <hr />

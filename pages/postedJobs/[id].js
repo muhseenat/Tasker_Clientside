@@ -4,7 +4,8 @@ import AppBar from '../../components/Nav'
 import { useRouter } from 'next/router';
 import axios from '../../axios'
 import Link from 'next/link';
-import { ToastContainer, toast } from 'react-toastify'; 
+import swal from 'sweetalert';
+
 const Appliedjobs = () => {
  
   const router = useRouter()
@@ -28,18 +29,28 @@ const Appliedjobs = () => {
 
   //JOB CANCEL HANDLER
   const handleCancel = (jobId) => {
-    // toast.warn('Are you Sure!');
-    axios.delete(`/cancel/job/${jobId}`).then((resp) => {
-      //success bar
-      toast.success('Post deleted succesfully')
-      // router.push('/jobs'); //want to add this bu t tastify not working.
-      setTimeout(() => {
-        router.push({
-          pathname: '/jobs',
-          query: { returnUrl: router.asPath }
-        })
-      }, 2000)
-    }).catch(err => console.log(err))
+    swal({
+      title: "Are you sure?",
+      text: "Once deleted, you will not be able to recover",
+      icon: "warning",
+      buttons: true,
+      dangerMode: true,
+    })
+    .then((willDelete) => {
+      if (willDelete) {
+        axios.delete(`/cancel/job/${jobId}`).then((resp) => {
+        
+          swal("Poof! Your imaginary file has been deleted!", {
+            icon: "success",
+          });
+        }).catch(err => console.log(err))
+       
+      } else {
+        swal("Your file will be safe");
+      }
+    });
+  
+   
   }
 
   return (
@@ -47,21 +58,11 @@ const Appliedjobs = () => {
       <AppBar />
       <div className='container'>
         <h2 className='text-center mt-2'>POSTED JOBS</h2>
-        <ToastContainer
-          position="top-center"
-          autoClose={2000}
-          hideProgressBar={false}
-          newestOnTop={false}
-          closeOnClick
-          rtl={false}
-          pauseOnFocusLoss
-          draggable
-          pauseOnHover
-        />
-        {show && <h3 className='mt-5'>NO JOBS POSTED YET...</h3>}
+      
+        {/* {show && <h3 className='mt-5'>NO JOBS POSTED YET...</h3>} */}
         {job.map((job, index) => {
           return (
-            <div className="card mb-4 mt-4" key={{ index }}>
+            <div className="card mb-4 mt-4" key={ index }>
               <img src="https://images.unsplash.com/photo-1507679799987-c73779587ccf?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTR8fGpvYiUyMHNlYXJjaHxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60" className="card-img-top" alt="card-image" />
               <div className="card-body">
                 <h5 className="card-title">{job.job_designation}({job.category})</h5>

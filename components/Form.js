@@ -3,7 +3,7 @@ import axios from '../axios';
 import { useRouter } from 'next/router';
 import { useSelector } from 'react-redux';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { ToastContainer, toast } from 'react-toastify';
+import swal from 'sweetalert';
 
 
 const Form = () => {
@@ -11,18 +11,18 @@ const Form = () => {
   const [categories, setCategories] = useState([])
   const user = useSelector(state => state.user.userData)
   const router = useRouter();
-  // if (!user) {
-  //   router.push('/login')
-  // }
-  const notify = () => toast.success('Successfully Posted', {
-    position: "top-center",
-    autoClose: 2000,
-    hideProgressBar: false,
-    closeOnClick: true,
-    pauseOnHover: true,
-    draggable: true,
-    progress: undefined,
-  });
+  useEffect(()=>{
+
+
+    if (!user) {
+      if(typeof window!==undefined){
+  
+        router.push('/login')
+        return false;
+      }
+    }
+  },[])
+
 
   var today = new Date();
   var dd = today.getDate();
@@ -40,7 +40,6 @@ const Form = () => {
   useEffect(() => {
 
     axios.get('/admin/get/category').then((resp) => {
-      console.log(resp);
       setCategories(resp?.data)
     }).catch(err => console.log(err))
   }, [])
@@ -67,18 +66,16 @@ const Form = () => {
 
   const handlePost = async (e) => {
     e.preventDefault()
-    console.log(formData);
     try {
       const res = await axios.post('/create/job', formData)
       if (res) {
-        setFormData(data);
-        toast.success('Successfully Posted')
-        setTimeout(() => {
-          router.push({
-            pathname: '/jobs',
-            query: { returnUrl: router.asPath }
-          })
-        }, 2000)
+        swal({
+          title: "Success",
+          text: "You Successfully post the job",
+          icon: "success",
+          button: "OK",
+        });
+        router.push('/jobs')
       }
     } catch (error) {
       console.log(error);
@@ -90,17 +87,7 @@ const Form = () => {
 
     <div className='container '>
       <h3 className='text-center py-3'>POST JOB</h3>
-      <ToastContainer
-        position="top-center"
-        autoClose={2000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-      />
+
       <form className='w-100' onSubmit={(e) => handlePost(e)}>
         <div className="form-row ">
           <div className="form-group col-md-6 m-3">

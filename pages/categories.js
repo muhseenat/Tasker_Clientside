@@ -9,7 +9,6 @@ const Categories = () => {
     useEffect(() => {
   
         axios.get('/admin/get/category').then((resp) => {
-          console.log(resp);
           setCategories(resp?.data)
         }).catch(err => console.log(err))
       }, [])

@@ -15,7 +15,6 @@ const SingleJob = () => {
     //  dispatch(setJobDetails(res.data))
     //  localStorage.setItem('jobs',JSON.stringify(res.data))
       setJobs(res.data?.filter(i=>i.user_id!=user?._id&&i.status!="Done"))
-      console.log(res.data);
     }).catch((err) => {
       console.log(err);
     })
@@ -32,7 +31,6 @@ const SingleJob = () => {
   })
   }
 
-  console.log(jobs);
   return (
 
     <>

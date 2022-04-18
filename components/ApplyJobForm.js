@@ -6,6 +6,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
+import swal from 'sweetalert';
 
 
 
@@ -72,22 +73,19 @@ const ApplyJobForm = () => {
 
     }
     axios.post('/apply/job', data).then((res) => {
-      toast.success('Apply Successfully', {
-        position: "top-center",
-        autoClose: 2000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
+      swal({
+        title: "Success",
+        text: "You Successfully applied the job",
+        icon: "success",
+        button: "OK",
       });
-      setTimeout(() => {
-        router.push({
-          pathname: '/jobs',
-          query: { returnUrl: router.asPath }
-        })
-      }, 2000)
-      setData(formData)
+      router.push('/jobs')
+      // setTimeout(() => {
+      //   router.push({
+      //     pathname: '/jobs',
+      //     query: { returnUrl: router.asPath }
+      //   })
+      // }, 2000)
 
     }).catch(err => console.log(err))
   }

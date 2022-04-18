@@ -7,11 +7,9 @@ const Taskers = () => {
     const [taskers,setTaskers]=useState([])
 useEffect(()=>{
  axios.get('/top/taskers').then((resp)=>{
-     console.log(resp?.data);
      setTaskers(resp?.data.slice(0,3))
  })
 },[])
-  console.log(taskers,'this is taskers');
     return (
 
         <>

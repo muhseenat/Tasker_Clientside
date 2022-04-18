@@ -38,10 +38,8 @@ const Login = () => {
   const [loginError, setLoginError] = useState("")
 
   const onSubmit = async (data) => {
-    console.log('working.....');
     try {
       const res = await axios.post('/login', data)
-      console.log(res);
       if (res) {
         dispatch(setUserDetails(res.data))
 
@@ -63,8 +61,7 @@ const Login = () => {
       
       }
     } catch (error) {
-      console.log(error.response)
-      console.log(error);
+   
       setLoginError(error.response?.data?.err)
       toast.error('Email or Password invalid', {
         position: "top-center",
