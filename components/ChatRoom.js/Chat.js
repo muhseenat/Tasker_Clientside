@@ -49,13 +49,10 @@ const Chat = () => {
 
 
   //USEEFFET TO CONNECT GET  ONLINE USERS
-  // useEffect(() => {
-  //   socket.current.emit('addUser', user?._id);
-  //   // socket.current.on('getUsers', users => {
-  //   //   setOnlineUsers(users)
-  //   //   // setOnlineUsers(users)
-  //   // })
-  // }, [user])
+  useEffect(() => {
+    socket.current.emit('addUser', user?._id);
+ 
+  }, [user])
 
 
 
