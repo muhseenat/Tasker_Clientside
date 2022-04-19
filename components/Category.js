@@ -87,6 +87,11 @@ const Category = ({categories,button}) => {
             a:hover{
                 color:white;
             }
+            @media screen and (max-width: 640px) {
+                .btn2{
+                    width:50%
+                }
+            }
         `
                 }
             </style>

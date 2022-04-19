@@ -5,9 +5,7 @@ const Conversation = ({conversation,currentUser}) => {
 const [user,setUser] = useState(null)
 useEffect(()=>{
   const friendId=conversation?.members.find((m)=>m!==currentUser._id)
-  console.log(friendId,'this id friend id');
   axios.get('/users?userId='+friendId).then((resp)=>{
-    console.log(resp.data,'this is datatatatatatatta');
     setUser(resp.data)
   }).catch(err=>console.log(err))
 

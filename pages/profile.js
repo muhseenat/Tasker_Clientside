@@ -102,11 +102,15 @@ const Profile = () => {
               }
               .container i:hover{
                 color: #03bfbc;
-              }
-              @media screen and (max-width: 500px) {
+              } 
+              @media screen and (max-width: 640px) {
+        
                .container{
-                width: 350px;
+                width: 300px;
+                height:600px;
+            
                }
+              }
             `
           }
         </style>

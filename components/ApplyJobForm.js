@@ -12,31 +12,32 @@ import swal from 'sweetalert';
 
 const ApplyJobForm = () => {
   const user = useSelector(state => state.user?.userData);
-  const jobs = useSelector(state => state.jobs?.jobData||[]);
-  const jobDetails = jobs.filter(job => job._id == id ||[])
+  useEffect(() => {
+
+  })
   const router = useRouter();
   const { id } = router.query
-  
-  const formData = {
-    user_id: user?._id,
-    provider_id: jobDetails[0]?.user_id,
-    job_name: jobDetails[0]?.job_designation,
-    province: jobDetails[0]?.province,
-    city: jobDetails[0]?.city,
-    pay: jobDetails[0]?.minimum_pay,
-    expiry_date: jobDetails[0]?.to,
-    job_id: id,
-    name: "",
-    place: "",
-    email: "",
-    qualification: "",
-    skill: "",
-    experience: ""
-  }
-  const [data, setData] = useState(formData)
 
- 
-  
+  // const formData = {
+  //   user_id: user?._id,
+  //   provider_id: jobDetails[0]?.user_id,
+  //   job_name: jobDetails[0]?.job_designation,
+  //   province: jobDetails[0]?.province,
+  //   city: jobDetails[0]?.city,
+  //   pay: jobDetails[0]?.minimum_pay,
+  //   expiry_date: jobDetails[0]?.to,
+  //   job_id: id,
+  //   name: "",
+  //   place: "",
+  //   email: "",
+  //   qualification: "",
+  //   skill: "",
+  //   experience: ""
+  // }
+  // const [data, setData] = useState(formData)
+
+
+
 
   const validationSchema = Yup.object().shape({
     name: Yup.string()
@@ -80,28 +81,23 @@ const ApplyJobForm = () => {
         button: "OK",
       });
       router.push('/jobs')
-      // setTimeout(() => {
-      //   router.push({
-      //     pathname: '/jobs',
-      //     query: { returnUrl: router.asPath }
-      //   })
-      // }, 2000)
+
 
     }).catch(err => console.log(err))
   }
-useEffect(()=>{
+  useEffect(() => {
 
 
-  if (!user) {
-    if(typeof window!==undefined){
+    if (!user) {
+      if (typeof window !== undefined) {
 
-      router.push('/login')
-      return false;
+        router.push('/login')
+        return false;
+      }
     }
-  }
-},[])
+  }, [])
 
-  
+
   if (!id) {
     return null;
   }

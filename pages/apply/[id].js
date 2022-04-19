@@ -5,7 +5,7 @@ export default function Applyjob() {
   return (
     <Fragment>
    <Nav/>
-<JobForm/>
+    <JobForm/>
     </Fragment>
 
   )

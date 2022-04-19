@@ -21,7 +21,7 @@ const DataTable = () => {
         { name: "Name", field: "name", sortable: true },
         { name: "Payment", field: "pay", sortable: true },
         { name: "Place", field: "place", sortable: true },
-        { name: "Status", field: "sstatus", sortable: false }
+        { name: "Status", field: "status", sortable: false }
     ];
 
     useEffect(() => {
@@ -29,8 +29,9 @@ const DataTable = () => {
         const getData = () => {
 
             axios.get(`/user/applied/job/${id}`).then((resp) => {
+                console.log(resp,'this is respooooo');
               
-                setComments(resp?.data[0]?.applied_jobs);
+                setComments(resp?.data);
 
             }).catch(err => console.log(err))
 
@@ -69,7 +70,7 @@ const DataTable = () => {
             (currentPage - 1) * ITEMS_PER_PAGE + ITEMS_PER_PAGE
         );
     }, [comments, currentPage, search, sorting]);
-
+ console.log(comments,'commrntsssss');
     return (
         <div className='container mt-5'>
             <h3 className='text-center'>Applied Jobs</h3>
@@ -106,10 +107,10 @@ const DataTable = () => {
                             {commentsData.map((comment,index) => (
                                 <tr key={index}>
                                     <th scope="row">
-                                        {comment.job_name}
+                                        {comment?.job[0]?.job_designation}
                                     </th>
-                                    <td>{comment.pay}</td>
-                                    <td>{comment.city}</td>
+                                    <td>{comment?.job[0]?.pay}</td>
+                                    <td>{comment?.job[0]?.city}</td>
                                     <td>{comment.status}</td>
 
                                 </tr>
