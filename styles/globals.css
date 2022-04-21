@@ -59,8 +59,12 @@ a{
   transition:all 0.4s
 }
 .job{
-  background:linear-gradient(rgba(4,11,75,0.719),rgba(4,26,100,0.73)),url(https://media.istockphoto.com/photos/close-up-of-unrecognizable-person-opening-office-door-picture-id1206393963?b=1&k=20&m=1206393963&s=170667a&w=0&h=jhwV9p1Al0aYw3WEqU0tirBabR-lZoHXT5PF52Y9AWc=)no-repeat;
+  /* background:linear-gradient(rgba(4,11,75,0.719),rgba(4,26,100,0.73)),url(https://media.istockphoto.com/photos/close-up-of-unrecognizable-person-opening-office-door-picture-id1206393963?b=1&k=20&m=1206393963&s=170667a&w=0&h=jhwV9p1Al0aYw3WEqU0tirBabR-lZoHXT5PF52Y9AWc=)no-repeat; */
+  background:linear-gradient(rgba(4,11,75,0.719),rgba(4,26,100,0.73));
+  background-image: url(https://media.istockphoto.com/photos/close-up-of-unrecognizable-person-opening-office-door-picture-id1206393963?b=1&k=20&m=1206393963&s=170667a&w=0&h=jhwV9p1Al0aYw3WEqU0tirBabR-lZoHXT5PF52Y9AWc=) no-repeat;
+
   background-size: cover;
+
   height: 90vh;
   width: 100%;
 
