@@ -49,7 +49,7 @@ const DataTable = () => {
             computedComments = computedComments.filter(
                 comment =>
                 comment?.job[0]?.job_designation.toLowerCase().includes(search.toLowerCase()) ||
-                comment?.job[0]?.citytoLowerCase().includes(search.toLowerCase())
+                comment?.job[0]?.city.toLowerCase().includes(search.toLowerCase())
             );
         }
 
