@@ -48,8 +48,8 @@ const DataTable = () => {
         if (search) {
             computedComments = computedComments.filter(
                 comment =>
-                    comment.job_name.toLowerCase().includes(search.toLowerCase()) ||
-                    comment.city.toLowerCase().includes(search.toLowerCase())
+                comment?.job[0]?.job_designation.toLowerCase().includes(search.toLowerCase()) ||
+                comment?.job[0]?.citytoLowerCase().includes(search.toLowerCase())
             );
         }
 
@@ -109,7 +109,7 @@ const DataTable = () => {
                                     <th scope="row">
                                         {comment?.job[0]?.job_designation}
                                     </th>
-                                    <td>{comment?.job[0]?.pay}</td>
+                                    <td>{comment?.job[0]?.minimum_pay}</td>
                                     <td>{comment?.job[0]?.city}</td>
                                     <td>{comment.status}</td>
 
