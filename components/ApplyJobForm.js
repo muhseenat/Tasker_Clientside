@@ -64,12 +64,12 @@ const ApplyJobForm = () => {
     data = {
       ...data,
       user_id: user?._id,
-      provider_id: jobDetails[0]?.user_id,
-      job_name: jobDetails[0]?.job_designation,
-      province: jobDetails[0]?.province,
-      city: jobDetails[0]?.city,
-      pay: jobDetails[0]?.minimum_pay,
-      expiry_date: jobDetails[0]?.to,
+      // provider_id: jobDetails[0]?.user_id,
+      // job_name: jobDetails[0]?.job_designation,
+      // province: jobDetails[0]?.province,
+      // city: jobDetails[0]?.city,
+      // pay: jobDetails[0]?.minimum_pay,
+      // expiry_date: jobDetails[0]?.to,
       job_id: id,
 
     }
